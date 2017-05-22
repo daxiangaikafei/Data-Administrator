@@ -1,0 +1,9 @@
+FROM node
+COPY * /user/src/
+CMD npm i nrm -g
+CMD nrm use taobao
+CMD npm i typescript pm2 -g
+CMD npm install
+CMD ["tsc","--project","tsconfig.json"]
+CMD []
+RUN  CMD 

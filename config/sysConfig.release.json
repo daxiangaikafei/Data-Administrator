@@ -1,0 +1,33 @@
+{
+    "server": {
+            "url": "",
+            "prot": ""
+        },
+        "localServer": {
+            "port": 3000
+        },
+        "redis": {
+            "sentinels":[
+                {
+                    "port": 6379,
+                    "host": "10.2.32.156",
+                    "family": 4
+                },
+                {
+                    "port": 6379,
+                    "host": "10.2.32.157",
+                    "family": 4
+                }
+            ],
+            "name":"qbiinode"
+        },
+        "qiniu": {
+            "ACCESS_KEY": "",
+            "SECRET_KEY": "",
+            "Bucket_Name": ""
+        },
+        "monogodb":{
+            "port": 27017,
+            "ip": "192.168.132.43"
+        }
+}

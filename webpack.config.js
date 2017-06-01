@@ -7,8 +7,22 @@ var minSize = {
         warnings: false
     }
 }
+function _externals() {
+    let manifest = require('./package.json');
+    let dependencies = manifest.dependencies;
+    // console.log("啊哈",dependencies)
+    let externals = {};
+    for (let p in dependencies) {
+        
+        externals[p] = 'commonjs ' + p;
+    }
+    return externals;
+}
 
 
+let externals = _externals();
+
+console.log(externals);
 module.exports = {
     entry: {
         app: "./app/app.ts"
@@ -23,12 +37,15 @@ module.exports = {
         Buffer: false,
         setImmediate: false
     },
+    //devtool: "source-map", 
     output: {
         path: __dirname + "/dist",
         filename: "app.js",
         chunkFilename: 'build[name]-[chunkhash:8].js'
     },
+    externals: externals,
     module: {
+        //noParse: /node_modules/,
         noParse: /node_modules\/(jquey|moment|chart|lodash\.js)/,
         rules: [
             {

@@ -9,12 +9,14 @@ var moment = require("moment");
 const remove = function(ctx, next,name:string) {
     let db = new DB(name);
     let result = new Result();
-    let data = ctx.query;
-    return db.remove(data).then((data) => {
-        ctx.body = result.success();
+    let param:any = ctx.params;//upBy = ctx.userId;
+    return db.remove(param.id,{upBy:ctx.userId}).then((data) => {
+        ctx.body = result.success(param.id);
     }).catch((error) => {
         ctx.body = result.error(1,error.message);
     })
+
+    
 }
 
 export default remove

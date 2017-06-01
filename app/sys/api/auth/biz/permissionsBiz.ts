@@ -1,8 +1,10 @@
 import Result from "./../../../../library/help/result";
 
-import {findUserByPerssions} from "./../dao/searchPermissions";
+import {findUserByPerssions} from "./../dao/searchPermissionsDao";
 
 import {each,isArray,isObjectLike} from "lodash";
+import DB from "./../../../model/index";
+const db = new DB("permission/permissions");
 
 const result = new Result();
 
@@ -71,4 +73,21 @@ var getNameByMap ={
 }
 
 
+
+//获取所有菜单
+export const getList = function(ctx, next) {
+
+    
+    var populate = function(param,sort,currentPage,pageSize){
+        return db.find(param).populate({
+            path:"type",
+            match: { isDel:0}
+        }).sort(sort).skip((currentPage) * pageSize).limit(pageSize)
+    }
+    return db.findByPage(ctx.query,{},{},populate).then((data:any) => {
+                ctx.body = result.success(data);
+            }).catch((error) => {
+                ctx.body = result.error(1,error.message);
+            });
+}
 //getPermissions();

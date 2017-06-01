@@ -3,7 +3,7 @@ import VerifyUser from "./../../../../library/verifyUser";
 import Result from "./../../../../library/help/result";
 import DB from "./../../../model/index";
 
-const db = new DB("/permission/todo");
+const db = new DB("permission/todo");
 
 
 import {getPermissions} from "./permissionsBiz";

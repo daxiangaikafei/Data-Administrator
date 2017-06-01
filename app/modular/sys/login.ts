@@ -72,7 +72,7 @@ const smallLogin = function(ctx,next){
 		if(data.responseCode===1000){
 			let userId = data.data.userId;
 			let token = tokenHelp.build(data.data.userId);
-			verifyUser.saveData(token,userId);
+			//verifyUser.saveData(token,userId);
 			verifyUser.setCookie(ctx,"token",token,userId);
 			ctx.body=data;
 		}else{

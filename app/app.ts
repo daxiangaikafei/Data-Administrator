@@ -1,28 +1,29 @@
 import        *             as         path       from       'path';
-import        *             as         winston    from       "winston";
+
 import        {each}        from       "lodash";
 import        *             as         koa        from       'koa';
-import        *             as         logger     from       'koa-logger';
+// import        *             as         logger     from       'koa-logger';
 import        *             as         Router     from       "koa-router";
-//            import        *          as         body       from 'koa-better-body'
 import        *             as         body       from       "koa-bodyparser";
 
-import        CSRF          from       "koa-csrf";
+// import        CSRF          from       "koa-csrf";
 
 import        Result        from       "./library/help/result";
 import        VerifyUser    from       "./library/verifyUser";
+import       RequestLogger     from    "./library/log/request";
+import logger from "./library/log/logger"
 
 
-import aa from "./library/help/mysql";
+//import aa from "./library/help/mysql";
 interface Sysconfig {
     server:any,
     localServer:any;
     redis:any;
     qiniu:any;
 }
-aa;
+//aa;
 //import * as onError    from 'koa-onerror'npm
-
+console.log(RequestLogger)
 const env     = process.env.NODE_ENV || 'development';
 
 
@@ -36,12 +37,18 @@ let verifyUser: VerifyUser = new VerifyUser();
 let app       : koa        = new koa();
 app.keys      = ['im a newer secret', '你说是啥 就是啥，呵呵哒'];
 
-app.use(logger());//日志
+// app.use(logger());//日志
 
 const convert = require('koa-convert');
 app.use(convert(body({
+    onerror: function (err, ctx) {
+        ctx.throw('body parse error', 422);
+    }
   // querystring: require('qs')
 })));//表单什么数据转换 
+
+//request日志处理
+app.use(RequestLogger());
 
 // app.use(new CSRF({
 //   invalidSessionSecretMessage: 'Invalid session secret',
@@ -52,52 +59,45 @@ app.use(convert(body({
 //   disableQuery: false
 // })); //csrf公鸡
 
-// winston.configure({
-//     transports: [
-//         new(winston.transports.Console)(),
-//         new(winston.transports.File)({filename: 'app.log'})
-//     ]
-// });
-// winston.add(winston.transports.File, {filename: 'app.log'});
-// winston.remove(winston.transports.Console);
-
-// winston.log('info', 'Hello distributed log files!');
-// winston.log('info', 'Test Log Message', { anything: 'This is metadata' });
-
-
+//异常日志处理
+// errorLogger(app);
 //异常处理
 app.context.onerror = function(err) {
+    result.error(500,"");
+    this.res.end(JSON.stringify(result.getValue()));
+
     if (err  ==  null) {
       return;
-    }
-    if(env === "development"){
+    }else if(env === "development"){
       console.log(err);
     }
-   result.error(500,"");
-   this.res.end(JSON.stringify(result.getValue()));
-   return;
+    logger.error("error",err.message,{"message":err.message,"stack":err.stack,info:this.res.body});
 }
-app.use(verifyUser.verify);
+
 /*处理  404   500  页面 */
 app.use((ctx,next)=>{
-    
     return next().then(()=>{
         if(ctx.status!==200){
             result.error(ctx.status,"");
             ctx.body=result.getValue();
+            logger.error("normal","",ctx.status);
         }else{
              return;
         }
-       
-        //if (404 != ctx.status&& 500 != ctx.status) return; 
-        // result.error(ctx.status,"");
-        // ctx.body=result.getValue();
     }).catch(error=>{
         console.error(error)
         result.error(1000,"超时");
         ctx.body=result.getValue();
+        logger.error("error","",error);
     });
 })
+
+
+app.on('error', err =>
+  logger.error('server error', err)
+);
+//用户校验
+app.use(verifyUser.verify);
 
 each(routers,function(router,index){
   app.use(router.routes())

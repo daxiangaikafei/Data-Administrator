@@ -32,7 +32,7 @@ var DepartmentSchema = new Schema({
     createBy:{
         type:String,
         required:true,
-        maxlength:30,
+        maxlength:32,
         minlength:6
     },
     createTime:{
@@ -42,7 +42,7 @@ var DepartmentSchema = new Schema({
     upBy:{
         type: String,
         required:true,
-        maxlength:30,
+        maxlength:32,
         minlength:6
     },
     upTime: {
@@ -55,6 +55,16 @@ var DepartmentSchema = new Schema({
         enum:[0,1]
     }
 });
+
+// DepartmentSchema.virtual('branchName').get(function(){
+//     console.log(this);
+//     return "你大爷";
+// })
+// DepartmentSchema.pre('findOne', preFind).pre('find', preFind);
+
+var preFind = function(){
+
+}
 
 module.exports = {
     Schema: DepartmentSchema,

@@ -9,15 +9,16 @@ import {isArray,each,isEmpty} from "lodash";
 
 //新增
 const save = function(ctx, next,config) {
-    let db = new DB(config.path+config.name);
+    let db = new DB(config.path);
     let result = new Result();
     let saveData:any = ctx.request.body;
-    saveData.createBy =  "------";
-    saveData.upBy = "000000000";
+    saveData.createBy =  ctx.userId;
+    saveData.upBy = ctx.userId;
     
     let hasProps = true;
-    let arrr = isArray(config.add.key)?config.add.key:config.add.key.split(",");
-    let newO = {};
+    let arrr = config.add===true?[]:config.add.key;
+    arrr = isArray(arrr)?arrr:(arrr).split(",");
+    let newO:any = {};
  
     each(arrr,function(value,index){
         if(isEmpty(saveData[value])){
@@ -26,7 +27,7 @@ const save = function(ctx, next,config) {
         }
         newO[value] = saveData[value];
     })
-    
+    // newO.isDel =0 ;
 
     if (hasProps) {
         

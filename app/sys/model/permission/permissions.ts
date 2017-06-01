@@ -15,15 +15,18 @@ var PermissionsSchema = new Schema({
         type:String,
         maxlength:300
     },
-    type:{
-        type:String,
-        maxlength:30
-    },
+    // type:{
+    //     type:String,
+    //     required:true,
+    //     maxlength:30
+    // },
+    type:{ type: Schema.Types.ObjectId, ref:'Dictionary' },
     isVisible:{
         type: Number,
         default: 0,
         enum:[0,1]
     },
+    
     status:{
         type: Number,
         default: 0,
@@ -32,7 +35,7 @@ var PermissionsSchema = new Schema({
     createBy:{
         type:String,
         required:true,
-        maxlength:30,
+        maxlength:32,
         minlength:6
     },
     createTime:{
@@ -42,7 +45,7 @@ var PermissionsSchema = new Schema({
     upBy:{
         type: String,
         required:true,
-        maxlength:30,
+        maxlength:32,
         minlength:6
     },
     upTime: {

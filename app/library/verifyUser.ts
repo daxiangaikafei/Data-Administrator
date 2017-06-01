@@ -34,10 +34,11 @@ class VerifyUser {
         	
     }
     //存入 redis token userId now
-    saveData(token:string,userId:string){
+    saveData(token:string,userId:string,saveObj){
                 let data = {
                     token,
                     userId,
+                    ...saveObj,
                     date:moment().format(format)
                 }
                 console.log("保存token",JSON.stringify(data));
@@ -49,6 +50,11 @@ class VerifyUser {
     getData(key:string){
         console.log("查询"+config.redis.tokenKey+":"+key)
         return redis.get(config.redis.tokenKey+":"+key);
+    }
+    getUserInfo(ctx){
+        return this.getData(this.getToken(ctx)).then((result)=>{
+            return JSON.parse(result);
+        })
     }
     //判断是否有大登录的ST  是够有token  和token是否失效
     verifyToken(token:string){
@@ -102,28 +108,29 @@ class VerifyUser {
 
         //console.log("url:"+ctx.request);
         url = url.split("?")[0];
-        return next();
-        // if(IgnoreUrls[url]){
-        //     return next();
-        // }
+        // return next();
+        if(IgnoreUrls[url]){
+            return next();
+        }
 
-        // if(token){
-        //     //console.log("token",token);
+        if(token){
+            //console.log("token",token);
             
-        //     return this.verifyToken(token).then((info:any)=>{
-        //         //console.log("info"+":"+info);
-        //         ctx.userId  = info.userId;
-        //         return next();
-        //     }).catch(()=>{
-        //         result.error(200,"登录过期");
-        //         ctx.body = result.getValue();
-        //         return; 
-        //     })
-        // }else{
-        //     result.error(200,"未登陆");
-        //     ctx.body = result.getValue();
-        //     return;
-        // }
+            return this.verifyToken(token).then((info:any)=>{
+                //console.log("info"+":"+info);
+                ctx.userId  = info.userId;
+                ctx.userInfo = info;
+                return next();
+            }).catch(()=>{
+                result.error(200,"登录过期");
+                ctx.body = result.getValue();
+                return; 
+            })
+        }else{
+            result.error(200,"未登陆");
+            ctx.body = result.getValue();
+            return;
+        }
         
     }
     

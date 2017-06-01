@@ -14,7 +14,7 @@ var UserSchema = new Schema({
     password:{
         type:String,
         require:true,
-        maxlength:30,
+        maxlength:64,
         minlength:6
     },//密码
     realName:{
@@ -25,25 +25,25 @@ var UserSchema = new Schema({
     },
     roleName:{
         type:String,
-        required:true,
+        // required:true,
         maxlength:30,
         minlength:1
     },
     departmentName:{
         type:String,
-        required:true,
+        // required:true,
         maxlength:30,
         minlength:1
     },
     branchName:{
         type:String,
-        required:true,
+        // required:true,
         maxlength:30,
         minlength:1
     },
     officeName:{
         type:String,
-        required:true,
+        // required:true,
         maxlength:30,
         minlength:1
     },
@@ -57,7 +57,7 @@ var UserSchema = new Schema({
     createBy:{
         type:String,
         required:true,
-        maxlength:30,
+        maxlength:32,
         minlength:6
     },
     createTime:{
@@ -67,7 +67,7 @@ var UserSchema = new Schema({
     upBy:{
         type: String,
         required:true,
-        maxlength:30,
+        maxlength:32,
         minlength:6
     },
     upTime: {

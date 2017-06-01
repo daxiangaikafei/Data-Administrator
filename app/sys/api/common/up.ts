@@ -11,6 +11,7 @@ const up = function(ctx, next,name:string) {
         let upData = ctx.request.body;
         let db = new DB(name);
         let result = new Result();
+         upData.upBy = ctx.userId;
         return db.update(upData._id, upData).then((data) => {
             ctx.body = result.success();
         }).catch((error) => {

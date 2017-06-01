@@ -17,7 +17,7 @@
                     "version": "v1",
                     "versions": ["v1", "v2", "v3"]
                 },
-                "/user/level": {
+                "/user/level": { 
                     "url": "/api/user/${userId}/level",
                     "version": "v1",
                     "versions": ["v1", "v2", "v3"]
@@ -76,11 +76,11 @@
         }
     },
     "ignoreUrls": {
-        "/api/account4Client/login": true,
-        "/api/qbii/news/getNewsList":true
+        "/api/sys/v1/user/login":true,
+        "/api/sys/v1/user/registered":true
     },
     "redis": {
-        "tokenKey": "nodeServer-token",
+        "tokenKey": "node-sys-token",
         "expiration": 2592000 
     },
     "cookie": {

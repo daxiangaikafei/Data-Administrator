@@ -76,11 +76,8 @@
         }
     },
     "ignoreUrls": {
-        "/api/account4Client/login": true,
-        "/api/qbii/news/getNewsList":true,
-        "/api/qbii/news/getNewsDetail":true,
-        "/api/sys/user/login":true,
-        "/api/sys/user/registered":true
+        "/api/sys/v1/user/login":true,
+        "/api/sys/v1/user/registered":true
     },
     "redis": {
         "tokenKey": "node-sys-token",

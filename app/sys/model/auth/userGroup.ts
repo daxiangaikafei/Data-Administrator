@@ -33,7 +33,7 @@ var UserGroupSchema = new Schema({
     createBy:{
         type:String,
         required:true,
-        maxlength:30,
+        maxlength:32,
         minlength:6
     },
     createTime:{
@@ -43,7 +43,7 @@ var UserGroupSchema = new Schema({
     upBy:{
         type: String,
         required:true,
-        maxlength:30,
+        maxlength:32,
         minlength:6
     },
     upTime: {

@@ -21,15 +21,20 @@ gulp.task("webpack", function(callback) {
 
 gulp.task("config",function(){
     gulp.src([
-        //"./app/config/localConfig.production.json",
-        //"./config/sysConfig.production.json",
+        "./app/config/localConfig.production.json",
+        "./config/sysConfig.production.json",
         "./process.json"
     ]).pipe(gulp.dest("./dist"));
 })
 
 gulp.task("mv",function(){
     gulp.src("./dist/*")
-    .pipe(gulp.dest("./../release/KoaServer/"));
+    .pipe(gulp.dest("./../qbao-bms/server/"));
+})
+
+gulp.task("mvPackage",function(){
+    gulp.src("./package.json")
+    .pipe(gulp.dest("./../qbao-bms/"));
 })
 
 gulp.task("build",function(){

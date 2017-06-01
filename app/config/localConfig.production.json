@@ -8,7 +8,7 @@
     },
     "routes": {
         "qbii": {
-            "domain": "http://10.2.31.110:8123",
+            "domain": "http://192.168.131.145:10550",
             "prefix": "/api/qbii",
             "timeout": 5000,
             "routes": {
@@ -17,7 +17,7 @@
                     "version": "v1",
                     "versions": ["v1", "v2", "v3"]
                 },
-                "/user/level": {
+                "/user/level": { 
                     "url": "/api/user/${userId}/level",
                     "version": "v1",
                     "versions": ["v1", "v2", "v3"]
@@ -70,17 +70,17 @@
             "timeout": 5000
         },
         "sys": {
-            "domain": "http://10.2.31.110:8123", 
+            "domain": "http://192.168.131.145:10550", 
             "prefix": "/api",
             "timeout": 5000
         }
     },
     "ignoreUrls": {
-        "/api/account4Client/login": true,
-        "/api/qbii/news/getNewsList":true
+        "/api/sys/v1/user/login":true,
+        "/api/sys/v1/user/registered":true
     },
     "redis": {
-        "tokenKey": "nodeServer-token",
+        "tokenKey": "node-sys-token",
         "expiration": 2592000 
     },
     "cookie": {

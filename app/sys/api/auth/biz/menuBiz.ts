@@ -5,7 +5,7 @@ import DB from "./../../../model/index";
 
 const db = new DB("permission/menu");
 
-
+import * as _ from "lodash";
 import {getPermissions} from "./permissionsBiz";
 let verifyUser = new VerifyUser();
 
@@ -15,12 +15,15 @@ export const getMenusByUser = function(ctx, next) {
      let result = new Result();
 
    
-        // console.log(userInfo)
+        // //console.log(userInfo)
         // let userId = "592f722aee8b265e8287f1af";
         return getPermissions(ctx.userId).then((permissions)=>{
-                
-                return db.find({permissions:{"$in":permissions},isDel:0}).sort({"sort":"desc"}).then((menus)=>{
-                        console.log(menus)
+                //{createTime:"asc"}
+                return db.getModel().find({permissions:{"$in":permissions},isDel:0}).sort({sort:"asc"}).then((menus)=>{
+                        // //console.log(menus)
+                        each(menus,function(value,index){
+                                //console.log("sort:"+value._doc.sort+" | createTime:"+value._doc.createTime  )
+                        })
                         ctx.body = result.success(buildMenuChild(menus)); 
                 })
         })
@@ -34,7 +37,7 @@ export const getMenus = function(ctx, next) {
      let result = new Result();
      
         return db.findByPage(ctx.query).then((menus)=>{
-                console.log(menus)
+                // //console.log(menus)
                 ctx.body = result.success(menus);
         })
 }
@@ -42,7 +45,7 @@ import {each} from "lodash";
 
 let buildMenuChild = function (menus:any){
         // if(menus)
-        //console.log(JSON.parse(JSON.stringify(menus)));
+        ////console.log(JSON.parse(JSON.stringify(menus)));
         menus = JSON.parse(JSON.stringify(menus));
         // return ""
         let parents = [];
@@ -57,22 +60,64 @@ let buildMenuChild = function (menus:any){
                         parents.push(value);
                 } 
         });
+        // each(chilsMaps,function(value,key){
+        //         each(value,function(valued,index){
+        //                 if(chilsMaps[valued._id]){
+        //                         valued.childrens = chilsMaps[valued._id];
+        //                         delete chilsMaps[valued._id];
+        //                         return value
+        //                 }
+        //         })
+        //         return value
+        // })
+
+
+        // var forEnd = function(maps){
+        //         each(maps,function(value,key){
+        //                 each(value,function(valued,index){
+        //                         if(maps[valued._id]){
+        //                                 valued.childrens = maps[valued._id];
+        //                                 delete chilsMaps[valued._id];
+        //                         }
+        //                 })
+        //                 // return value;
+        //         })
+        //         if(_.size(chilsMaps)!==_.size(parents)){
+        //                 forEnd(maps);
+        //         }
+        // }
         
-        each(chilsMaps,function(value,key){
-                each(value,function(valued,index){
-                        if(chilsMaps[valued._id]){
-                                valued.childrens = chilsMaps[valued._id];
-                                delete chilsMaps[valued._id];
+
+        // each(parents,function(value,index){
+        //         value.childrens = chilsMaps[value._id]
+        // })
+
+        let newA= [],newM = [];
+
+        
+
+        function forEnd(parent,maps){
+                let map = {};
+                // 592fe5e49e15aa47aa70a127  prevId 592fb06af11f4783031255a5
+                //console.log("id",parent)
+                each(parent,function(value,index){
+                        if(maps[value._id]){
+                                let children = forEnd( maps[value._id],maps);
+                                value.childrens = children;
+                                
                         }
                 })
-                // return value;
-        })
+                return parent;
+        }
+        let a = forEnd(parents,chilsMaps);
 
-        each(parents,function(value,index){
-                value.childrens = chilsMaps[value._id]
-        })
-        return parents;
+        return a;
 }
+
+ 
+
+
+
  var getChildsById = function(id,childrens){
         if(!childrens||childrens.length===0){
                 return false;
@@ -90,7 +135,7 @@ export const getMenuPermissions = function(ctx, next) {
      return db.getModel().findOne({_id: id,isDel:0}).populate({
                 path:"permissions"
             }).then((data)=>{
-                console.log(data);
+                //console.log(data);
                 ctx.body = result.success(data.permissions);
             })
 

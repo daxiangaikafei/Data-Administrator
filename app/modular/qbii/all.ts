@@ -33,8 +33,8 @@ export const all  = function(ctx,next){
 	let urlFetch = config.routes[url]["url"];
     var compiled = template(urlFetch);
     urlFetch = compiled(Object.assign({},{userId},param,params));
-	// console.log("urlFetch:"+urlFetch)
-	console.log("url:"+urlFetch)
+	// //console.log("urlFetch:"+urlFetch)
+	//console.log("url:"+urlFetch)
 	console.dir(param)
 	if(urlFetch){
 		return fetch.getData(urlFetch,param,method).then((data:any)=>{
@@ -50,7 +50,7 @@ export const all  = function(ctx,next){
 			}
 			
 		}).catch((error)=>{
-			console.log(error)
+			//console.log(error)
 		})
 	}else{
 		result.error(404);

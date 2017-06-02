@@ -14,15 +14,15 @@ export var getPermissions = function(userId){
     
     //let userId = "591d605257079155139b7229";
     return findUserByPerssions(userId).then((data)=>{
-        //console.log(data);
+        ////console.log(data);
         let perssionsMap = {};
         
         let dataString = JSON.stringify(data);
-        // console.log(data);
+        // //console.log(data);
         data = JSON.parse(dataString);
         
         let result = getNameByMap.init("permissions",data,"_id");
-        console.log("-----",result)
+        //console.log("-----",result)
         
         return result;
         //591d605257079155139b7229
@@ -51,7 +51,7 @@ var getNameByMap ={
         })
         
         return resultArray;
-        // console.log("result",result);
+        // //console.log("result",result);
 
     },
     forEnd:function(name,data){

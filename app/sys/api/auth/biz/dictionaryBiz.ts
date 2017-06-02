@@ -12,7 +12,7 @@ export const getList = function(ctx, next) {
      let {type} = ctx.params;
      let result = new Result();
      return db.find({primarykey:type}).sort({"sort":"desc"}).then((data)=>{
-        //      console.log(data);
+        //      //console.log(data);
             ctx.body = result.success(data);
         })
 

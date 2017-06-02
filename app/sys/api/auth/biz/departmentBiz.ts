@@ -40,7 +40,7 @@ export const getSelectData = function(ctx,next){
             // departmentsMap[value._doc._id] = value._doc;
             let newArray = departmentsMap[value.branchId]||[];
             newArray.push(value);
-            console.log("bracnhId",value)
+            //console.log("bracnhId",value)
             departmentsMap[value.branchId] = newArray;
         })
         let newA = [];

@@ -24,13 +24,13 @@ var pool  = mysql.createPool({
 // };
 
 // (async function(){
-//   console.log("1111")
+//   //console.log("1111")
 //   connection = await getConnection();
-//    console.log("222222")
+//    //console.log("222222")
 // })();
 
 
- console.log("33333")
+ //console.log("33333")
 pool.getConnection(function(err, connection) {
     
 });
@@ -39,13 +39,13 @@ pool.getConnection(function(err, connection) {
 
 // pool.query('SELECT 1 + 1 AS solution', function (error, results, fields) {
 //   if (error) throw error;
-//   console.log('The solution is: ', results[0].solution);
+//   //console.log('The solution is: ', results[0].solution);
 // });
 
 // pool.query('SELECT * from `user`', function (error, results, fields) {
   
 //   if (error) throw error;
-//   console.log('The solution is: ', results[0].id);
+//   //console.log('The solution is: ', results[0].id);
 // });
 
 export default pool;

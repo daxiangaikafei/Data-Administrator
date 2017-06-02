@@ -6,7 +6,7 @@ const { monogodb } = require("./../../../config/index");
 mongoose.connect('mongodb://' + monogodb.ip + ":" + monogodb.port + '/temp1', function(error) {
     // body...
     if (error) {
-        console.log("连接数据库 出错", error);
+        //console.log("连接数据库 出错", error);
     }
 });
 
@@ -14,7 +14,7 @@ class DB {
     private  Model
     constructor(path) {
         let model = require("./" + path);
-        console.error("path:",path)
+        // console.error("path:",path)
         //let a:mongoose.model ;
         this.Model = mongoose.model(model.dataBasename, model.Schema);
 
@@ -100,7 +100,7 @@ class DB {
         return Promise.all([model.find(data).count(),populatePromise?populatePromise(data,sort,currentPage-1,pageSize):model.find(data).sort(sort).skip((currentPage - 1) * pageSize).limit(pageSize)])
         // return Promise.all([model.find(data).sort(sort).count(), model.find(data).sort(sort).skip((currentPage - 1) * pageSize).limit(pageSize)])
             .then(function(results) {
-                console.log(results);
+                //console.log(results);
                 return {
                     pageInfo:{
                         currentPage: currentPage,

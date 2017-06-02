@@ -10,7 +10,7 @@ var minSize = {
 function _externals() {
     let manifest = require('./package.json');
     let dependencies = manifest.dependencies;
-    // console.log("啊哈",dependencies)
+    // //console.log("啊哈",dependencies)
     let externals = {};
     for (let p in dependencies) {
         
@@ -22,7 +22,7 @@ function _externals() {
 
 let externals = _externals();
 
-console.log(externals);
+//console.log(externals);
 module.exports = {
     entry: {
         app: "./app/app.ts"

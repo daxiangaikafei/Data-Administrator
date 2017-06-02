@@ -57,7 +57,7 @@ var DepartmentSchema = new Schema({
 });
 
 // DepartmentSchema.virtual('branchName').get(function(){
-//     console.log(this);
+//     //console.log(this);
 //     return "你大爷";
 // })
 // DepartmentSchema.pre('findOne', preFind).pre('find', preFind);

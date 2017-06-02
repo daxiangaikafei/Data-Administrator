@@ -66,7 +66,7 @@ const find = function(ctx, next) {
 
     // }
     return db.find(saveData).then((data) => {
-        //console.log("查询Wie", data);
+        ////console.log("查询Wie", data);
         each(data, function(one, index) {
             data[index]._doc.creatTime = moment(one.creatTime).format("YYYY-MM-DD HH:mm:ss");
             data[index]._doc.time = moment(one.time).format("YYYY-MM-DD HH:mm:ss");

@@ -41,14 +41,14 @@ class VerifyUser {
                     ...saveObj,
                     date:moment().format(format)
                 }
-                console.log("保存token",JSON.stringify(data));
+                //console.log("保存token",JSON.stringify(data));
                 let key = config.redis.tokenKey+":"+(SSO===true?userId:token);
                 redis.set(key,JSON.stringify(data));
                 redis.expire(key,config.redis.expiration);
                 //redis.set(config.redis.tokenKey+":"+userId,JSON.stringify(data));
     }
     getData(key:string){
-        console.log("查询"+config.redis.tokenKey+":"+key)
+        //console.log("查询"+config.redis.tokenKey+":"+key)
         return redis.get(config.redis.tokenKey+":"+key);
     }
     getUserInfo(ctx){
@@ -106,7 +106,7 @@ class VerifyUser {
         let token  = this.getToken(ctx);
         let {url} = ctx;
 
-        //console.log("url:"+ctx.request);
+        ////console.log("url:"+ctx.request);
         url = url.split("?")[0];
         // return next();
         if(IgnoreUrls[url]){
@@ -114,10 +114,10 @@ class VerifyUser {
         }
 
         if(token){
-            //console.log("token",token);
+            ////console.log("token",token);
             
             return this.verifyToken(token).then((info:any)=>{
-                //console.log("info"+":"+info);
+                ////console.log("info"+":"+info);
                 ctx.userId  = info.userId;
                 ctx.userInfo = info;
                 return next();

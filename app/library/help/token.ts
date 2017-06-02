@@ -13,7 +13,7 @@ const message = "啊哈你说这个是啥，其实就是Hmac的message，干啥�
 //     }
 // );
 // decipher.on('end', () => {
-//     console.log(decrypted);
+//     //console.log(decrypted);
 //     // Prints: some clear text data
 // });
 
@@ -26,13 +26,13 @@ class Token {
             .update(message)
             .digest('hex');
         //都这样加密了， 你还能破解 我也是啥办法没有了
-        //console.log("加密userId" + userId + ",加密后:" + hash + "长度为:" + hash.toString().length);
+        ////console.log("加密userId" + userId + ",加密后:" + hash + "长度为:" + hash.toString().length);
         return hash;
     }
     decipher(token) {
         // decipher.write(token, 'hex');
         // var a = decipher.end();
-        // console.log(a)
+        // //console.log(a)
         //crypto crypto. md
     }
 }
@@ -43,10 +43,10 @@ class Token {
 //             .update(message)
 //             .digest('hex');
 
-// console.log("",+hash);
+// //console.log("",+hash);
 //                 var decipher = crypto.createDecipheriv("des-ede3", message, '');
 //                let rawdata = decipher.update(hash,"hex","utf8");
-//                console.log(rawdata);
+//                //console.log(rawdata);
                // rawdata += decipher.final(digest);
 
 

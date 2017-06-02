@@ -22,20 +22,20 @@ let redis = new Redis(redisConfig.redis);
 // redis.mset({ k1: 'v1', k2: 'v2' });
 // redis.get('k1', function (err, result) {
 //   // result === 'v1';
-//   console.log("1:"+result);
+//   //console.log("1:"+result);
 // });
 
 // // redis.mset(new Map([['k3', 'v3'], ['k4', 'v4']]));
 // // redis.get('k3', function (err, result) {
 // //   // result === 'v3';
-// //   console.log("2:"+result);
+// //   //console.log("2:"+result);
 // // });
 
 
 // redis.set('foo', 'bar');
 // redis.expire('foo',10);
 // redis.get('foo', function (err, result) {
-//   console.log(result);
+//   //console.log(result);
 // });
 //var redis = new Redis();
 // var pub = new Redis(redisConfig.redis);
@@ -50,15 +50,15 @@ let redis = new Redis(redisConfig.redis);
 // redis.on('message', function (channel, message) {
 //   // Receive message Hello world! from channel news
 //   // Receive message Hello again! from channel music
-//   console.log('Receive message %s from channel %s', message, channel);
+//   //console.log('Receive message %s from channel %s', message, channel);
 // });
 
 // // There's also an event called 'messageBuffer', which is the same as 'message' except
 // // it returns buffers instead of strings.
 // redis.on('messageBuffer', function (channel, message) {
 //   // Both `channel` and `message` are buffers.
-//   console.log(channel,message);
+//   //console.log(channel,message);
 // });
-// console.log("........");
+// //console.log("........");
 
 export default redis;

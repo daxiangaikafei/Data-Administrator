@@ -35,7 +35,7 @@ const logger = function(){
     
 
     return function(ctx,next){
-        // console.log(ctx.request);
+        // //console.log(ctx.request);
         let {request} = ctx;
         log.info("request","详情",{"header":ctx.request.header,"ip":request.ip,"body":request.body,"originalUrl":request.originalUrl,pid:process.pid,uid:process.getuid()});
         return next();

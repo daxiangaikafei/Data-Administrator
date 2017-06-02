@@ -40,7 +40,7 @@ class Fetch {
             url += "?" + toExcString(param)
         }
         headers = getHeadersByRepType(repType, Object.assign({},this.headers,headers));
-       // console.log(headers);
+       // //console.log(headers);
         let body = getDataByRepType(repType, param);
         return timeoutPromise(timeout || this.timeout, fetch(this.domain + url, {
             method: type,
@@ -50,10 +50,10 @@ class Fetch {
                 ? undefined
                 : body)
         }).then((res) => {
-            console.log("fetxhUrl:"+url)
+            //console.log("fetxhUrl:"+url)
             return res.json()
         }).catch((e) => {
-            console.log(e);
+            //console.log(e);
         }));
     }
 }

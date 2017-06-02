@@ -48,7 +48,7 @@ const login = function(ctx, next) {
                     });
                     verifyUser.setCookie(ctx,"token",token,userId);
                     
-                    console.log(JSON.stringify(userInfo))
+                    //console.log(JSON.stringify(userInfo))
                     ctx.body = userInfo;
                     ctx.body = result.success({
                         officeName:userInfo.officeName,
@@ -86,7 +86,8 @@ const loginOff = function(ctx, next) {
     let result = new Result();
     // ctx.session.userkey = undefined;
     verifyUser.setCookie(ctx,"token",undefined,undefined);
-    ctx.body = result.error(200,"未登录");
+    // ctx.body = result.error(200,"未登录");
+     ctx.body = result.success();
 }
 
 const registered = function(ctx, next) {
@@ -130,7 +131,7 @@ const getUserInfo = function(ctx,next){
     let result = new Result();
         
             //newUserInfo.password = passWord.encrypt(newUserInfo.password);
-            return db.find({_id:"592e1eeec34325edfb70cc7e", isDel:0}).populate({
+            return db.getModel().findOne({_id:ctx.userId, isDel:0}).populate({
                 path:"userGroups",
                 select:"name",
                 match: { isDel:0}
@@ -151,7 +152,7 @@ const getUserInfo = function(ctx,next){
             }).then((data:any) => {
                 if (data) {
                     let userInfo = data._doc;
-                    ctx.body = userInfo;
+                    // ctx.body = userInfo;
                     ctx.body = result.success({
                         officeName:userInfo.officeName,
                         branchName:userInfo.branchName,

@@ -76,8 +76,7 @@
         }
     },
     "ignoreUrls": {
-        "/api/sys/v1/user/login":true,
-        "/api/sys/v1/user/registered":true
+        "/api/sys/v1/user/login":true
     },
     "redis": {
         "tokenKey": "node-sys-token",

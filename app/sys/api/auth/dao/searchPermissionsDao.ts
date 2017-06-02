@@ -38,11 +38,11 @@ export var findUserByPerssions = function(userId:string){
             })
             .then((data) => {
                 resolve(data);
-                // console.log("data", data.roles[0]);
-                // console.log("data", data.roles[0].modular[0].permissions);
+                // //console.log("data", data.roles[0]);
+                // //console.log("data", data.roles[0].modular[0].permissions);
             })
             .catch((error) => {
-                console.log(error);
+                //console.log(error);
                 reject(error);
             });
         
@@ -67,11 +67,11 @@ export var findUserByPerssions = function(userId:string){
            
 //             .then((data) => {
                 
-//                 console.log("data", data);
-//                 console.log("data", data.userGroups[0].roles[0]);
+//                 //console.log("data", data);
+//                 //console.log("data", data.userGroups[0].roles[0]);
 //             })
 //             .catch((error) => {
-//                 console.log(error);
+//                 //console.log(error);
 //                 // reject(error);
 //             });
 

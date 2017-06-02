@@ -52,7 +52,7 @@ export const login = function(ctx,next){
 
 const smallLogin = function(ctx,next){
 	 let searchParam  = ctx.request.body;
-	 console.log("?",searchParam);
+	 //console.log("?",searchParam);
 	 let result:Result = new Result();
 	 if(!searchParam.st){
 		 result.error(404);

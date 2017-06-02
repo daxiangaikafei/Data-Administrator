@@ -23,7 +23,7 @@ interface Sysconfig {
 }
 //aa;
 //import * as onError    from 'koa-onerror'npm
-console.log(RequestLogger)
+//console.log(RequestLogger)
 const env     = process.env.NODE_ENV || 'development';
 
 
@@ -69,7 +69,7 @@ app.context.onerror = function(err) {
     if (err  ==  null) {
       return;
     }else if(env === "development"){
-      console.log(err);
+      //console.log(err);
     }
     logger.error("error",err.message,{"message":err.message,"stack":err.stack,info:this.res.body});
 }
@@ -85,7 +85,7 @@ app.use((ctx,next)=>{
              return;
         }
     }).catch(error=>{
-        console.error(error)
+        // console.error(error)
         result.error(1000,"超时");
         ctx.body=result.getValue();
         logger.error("error","",error);

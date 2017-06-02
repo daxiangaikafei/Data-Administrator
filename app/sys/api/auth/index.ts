@@ -2,7 +2,7 @@ import * as  Router from "koa-router";
 import  user from "./biz/userBiz";
 
 import commonRoutes from "./../common/index";
-console.log(commonRoutes)
+//console.log(commonRoutes)
 
 
 
@@ -125,20 +125,20 @@ let baseUrl = "/db/";
 for(let key in apis){
     let url = baseUrl+key;
     let path = apis[key].path;
-    console.log("path",path)
+    //console.log("path",path)
     apis[key].add&&router.post(url+"/add",(ctx,next)=>{return commonRoutes.save(ctx,next,apis[key])});
     apis[key].remove&&router.delete(url+"/:id",(ctx,next)=>{return commonRoutes.remove(ctx,next,path)});
     apis[key].up&&router.put(url+"/up",(ctx,next)=>{return commonRoutes.up(ctx,next,path)});
     apis[key].find&&router.get(url+"/find",(ctx,next)=>{return commonRoutes.find(ctx,next,apis[key])});
     apis[key].findByPage&&router.get(url+"/findByPage",(ctx,next)=>{return commonRoutes.findByPage(ctx,next,apis[key])});
-    console.log("url:",url+"/add",apis[key].add)//findByPage
+    //console.log("url:",url+"/add",apis[key].add)//findByPage
 }
 
 
 router.post("/v1/user/login",user.login);
 router.post("/v1/user/registered",user.registered);
 router.post("/v1/user/isLogin",user.isLogin);
-router.get("/v1/user/",user.getUserInfo);
+router.get("/v1/user",user.getUserInfo);
 router.get("/db/user/findByPage",user.getUsers);
 router.get("/v1/user/loginOff",user.loginOff);
 router.put("/db/user/up",user.upUser);

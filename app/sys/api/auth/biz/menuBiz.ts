@@ -17,7 +17,7 @@ export const getMenusByUser = function(ctx, next) {
    
         // //console.log(userInfo)
         // let userId = "592f722aee8b265e8287f1af";
-        return getPermissions(ctx.userId).then((permissions)=>{
+        return getPermissions(ctx.state.userInfo.userId).then((permissions)=>{
                 //{createTime:"asc"}
                 return db.getModel().find({permissions:{"$in":permissions},isDel:0}).sort({sort:"asc"}).then((menus)=>{
                         // //console.log(menus)

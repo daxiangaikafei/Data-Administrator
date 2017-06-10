@@ -49,7 +49,7 @@ const login = function(ctx, next) {
                     verifyUser.setCookie(ctx,"token",token,userId);
                     
                     //console.log(JSON.stringify(userInfo))
-                    ctx.body = userInfo;
+                    ctx.state = userInfo;
                     ctx.body = result.success({
                         officeName:userInfo.officeName,
                         branchName:userInfo.branchName,
@@ -93,8 +93,8 @@ const loginOff = function(ctx, next) {
 const registered = function(ctx, next) {
     let result = new Result();
     let saveData = ctx.request.body;
-    saveData.createBy =  ctx.userId;
-    saveData.upBy = ctx.userId;
+    saveData.createBy =  ctx.state.userInfo.userId;
+    saveData.upBy = ctx.state.userInfo.userId;
     if(saveData.username && saveData.password){
         if(!/^[a-zA-Z]{1}([a-zA-Z0-9]|[._]){4,19}$/.exec(saveData.password)){
             ctx.body = result.error(1,"密码只能输入6-20个以字母开头的字符串")
@@ -131,7 +131,7 @@ const getUserInfo = function(ctx,next){
     let result = new Result();
         
             //newUserInfo.password = passWord.encrypt(newUserInfo.password);
-            return db.getModel().findOne({_id:ctx.userId, isDel:0}).populate({
+            return db.getModel().findOne({_id:ctx.state.userInfo.userId, isDel:0}).populate({
                 path:"userGroups",
                 select:"name",
                 match: { isDel:0}
@@ -171,6 +171,8 @@ const getUserInfo = function(ctx,next){
             });
        
 }
+
+// const a = await fun
 
 //查询所有用户
 const getUsers = function(ctx,next){
@@ -218,7 +220,7 @@ const getUsers = function(ctx,next){
 const upUser = function (ctx, next) {
     let result = new Result();
     let saveData = ctx.request.body;
-    saveData.upBy = ctx.userId;
+    saveData.upBy = ctx.state.userInfo.userId;
     if (saveData.password&&saveData.password!=="") {
         if (!/^[a-zA-Z]{1}([a-zA-Z0-9]|[._]){4,19}$/.exec(saveData.password)) {
             ctx.body = result.error(1, "密码只能输入6-20个以字母开头的字符串")

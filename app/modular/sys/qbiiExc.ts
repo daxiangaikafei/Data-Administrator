@@ -22,7 +22,7 @@ fetch.setTimeout(config.timeout);
 
 export const isFinishNews = function(ctx,next){
 	let result:Result = new Result();
-	//console.log("userId:",ctx.userId);
+	//console.log("userId:",ctx.state.userInfo.userId);
 	return fetch.getData("/api/news/isFinishNews.html",{},"POST").then((data)=>{
 		//result.success(data);
 		//ctx.body=result.getValue();

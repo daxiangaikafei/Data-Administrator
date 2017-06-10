@@ -40,15 +40,17 @@ app.keys      = ['im a newer secret', '你说是啥 就是啥，呵呵哒'];
 // app.use(logger());//日志
 
 const convert = require('koa-convert');
+
+
+//request日志处理
+app.use(RequestLogger());
+
 app.use(convert(body({
     onerror: function (err, ctx) {
         ctx.throw('body parse error', 422);
     }
   // querystring: require('qs')
 })));//表单什么数据转换 
-
-//request日志处理
-app.use(RequestLogger());
 
 // app.use(new CSRF({
 //   invalidSessionSecretMessage: 'Invalid session secret',
@@ -63,15 +65,12 @@ app.use(RequestLogger());
 // errorLogger(app);
 //异常处理
 app.context.onerror = function(err) {
-    result.error(500,"");
-    this.res.end(JSON.stringify(result.getValue()));
 
     if (err  ==  null) {
       return;
-    }else if(env === "development"){
-      //console.log(err);
     }
-    logger.error("error",err.message,{"message":err.message,"stack":err.stack,info:this.res.body});
+    result.error(500,"");
+    this.res.end(JSON.stringify(result.getValue()));
 }
 
 /*处理  404   500  页面 */
@@ -82,7 +81,7 @@ app.use((ctx,next)=>{
             ctx.body=result.getValue();
             logger.error("normal","",ctx.status);
         }else{
-             return;
+            //  return;
         }
     }).catch(error=>{
         // console.error(error)

@@ -31,7 +31,7 @@ fetch.setTimeout(config.timeout);
 
 export const login = function(ctx,next){
 	let result:Result = new Result();
-	//console.log("userId:",ctx.userId);
+	//console.log("userId:",ctx.state.userInfo.userId);
 	return fetch.getData("/api/news/getNewsList.html",{},"GET").then((data)=>{
 		result.success(data);
 		ctx.body=result.getValue();

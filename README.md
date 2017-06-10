@@ -19,7 +19,7 @@ npm i typescript gulp pm2 webpack -g
 
  #1 获取用户id
 
- ctx.userId
+ ctx.state.userInfo.userId
 
  #1  统一返回值
 

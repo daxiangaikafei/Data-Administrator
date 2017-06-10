@@ -118,8 +118,9 @@ class VerifyUser {
             
             return this.verifyToken(token).then((info:any)=>{
                 ////console.log("info"+":"+info);
-                ctx.userId  = info.userId;
-                ctx.userInfo = info;
+                // ctx.state.userInfo.userId  = info.userId;
+                // ctx.userInfo = info;
+                ctx.state.userInfo = info;
                 return next();
             }).catch(()=>{
                 result.error(200,"登录过期");

@@ -12,8 +12,8 @@ const save = function(ctx, next,config) {
     let db = new DB(config.path);
     let result = new Result();
     let saveData:any = ctx.request.body;
-    saveData.createBy =  ctx.userId;
-    saveData.upBy = ctx.userId;
+    saveData.createBy =  ctx.state.userInfo.userId;
+    saveData.upBy = ctx.state.userInfo.userId;
     
     let hasProps = true;
     let arrr = config.add===true?[]:config.add.key;

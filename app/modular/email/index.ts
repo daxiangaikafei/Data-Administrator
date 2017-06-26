@@ -17,4 +17,3 @@ router.prefix(curConf.prefix)
 
 router.get("/warn", sendWarn);
 module.exports = router;
-

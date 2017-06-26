@@ -73,10 +73,36 @@
             "domain": "http://192.168.131.145:10550", 
             "prefix": "/api",
             "timeout": 5000
+        },
+        "email": {
+            "domain": "http://127.0.0.1:3002",
+            "prefix": "/api/email",
+            "timeout": 5000,
+            "routes":{
+                "/warn": {
+                    "url": "/warn",
+                    "version": "v1",
+                    "versions": ["v1", "v2", "v3"]
+                }
+            },
+
+            "outServer":{
+                "host": "smtp.126.com",
+                "port": 465,
+                "user": "wangqingzhu36@126.com",
+                "pass": ""
+            },
+
+            "warn": {
+                "list": [
+                    "wangqingzhu1025@126.com"
+                ]
+            }
         }
     },
     "ignoreUrls": {
-        "/api/sys/v1/user/login":true
+        "/api/sys/v1/user/login":true,
+        "/api/email/warn":true
     },
     "redis": {
         "tokenKey": "node-sys-token",

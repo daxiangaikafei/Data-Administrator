@@ -1,18 +1,20 @@
+interface Config  {
+    error:any;
+    routes:any;
+    ignoreUrls:any;
+    redis:any;
+    cookie:any;
+    SSO:boolean;
+}
+
 const querystring = require('querystring');
 const url = require('url');
 const nodeEmail = require('nodemailer');
 
-const hostConf: any = {
-    host: "smtp.126.com",
-    port: 465,
-    user: "wangqingzhu36@126.com",
-    pass: ""
-};
-const whiteList: any = {
-    list: [
-        "wangqingzhu1025@126.com"
-    ]
-};
+const config:Config = require("./../../config/index");
+const curConf:any = config.routes.email;
+const hostConf: any = curConf.outServer;
+const whiteList: any = curConf.warn.list;
 
 const email: any = nodeEmail.createTransport({
     host: hostConf['host'],
@@ -50,7 +52,7 @@ const pageTools = (function () {
     }
 })();
 
-export const sendWarn = function (ctx, conf) {
+export const sendWarn = function (ctx) {
     let req: any = ctx.request;
     let res: any = ctx.response;
     let params: any = ctx.query;

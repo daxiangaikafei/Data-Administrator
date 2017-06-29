@@ -13,6 +13,11 @@ import        VerifyUser    from       "./library/verifyUser";
 import       RequestLogger     from    "./library/log/request";
 import logger from "./library/log/logger"
 
+import RedisData from "./library/help/redisData";
+let xx = new RedisData("lll");
+let info  = xx.setProps("name.sss.xx",1223);
+
+
 
 //import aa from "./library/help/mysql";
 interface Sysconfig {

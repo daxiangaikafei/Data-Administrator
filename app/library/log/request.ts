@@ -1,12 +1,20 @@
 import * as winston from "winston";
-
+import * as path from "path";
+require('winston-daily-rotate-file')
 // winston.configure({     transports: [
 // new(winston.transports.Console)(),
 // new(winston.transports.File)({filename: 'app.log'})     ] });
 
 var log = new(winston.Logger)({
   transports: [//   new (winston.transports.Console)(),
-    new(winston.transports.File)({filename: 'request.log'})]
+
+    // new winston.transports.DailyRotateFile({filename: 'request', datePattern: '_yyyy-MM-ddTHH.log'})
+    // new(winston.transports.File)({filename: 'request.log'})
+    new winston.transports.DailyRotateFile({
+      filename: path.resolve(process.cwd(),'./log/request'),
+      datePattern: '_yyyy-MM-ddTHH.log'
+    })
+    ]
 });
 
 // winston.add(winston.transports.File, {filename: 'app.log'});
@@ -20,6 +28,7 @@ const logger = function () {
     // //console.log(ctx.request);
     let {request} = ctx;
     let userId = "";
+    let _startTime = Date.now()
     // return next();
     try {
       await next();
@@ -32,9 +41,11 @@ const logger = function () {
         userId,
         error: {
           ...error
-        }
+        },
+        time: Date.now() - _startTime + "ms"
       })
       ctx.throw(error.Message, 500);
+      console.error(error);
 
     } finally {
       log[getLogLevel(ctx.status)]("request", "....", {
@@ -47,8 +58,9 @@ const logger = function () {
           "body": request.body,
           "originalUrl": request.originalUrl,
           "method":request.method
-        }
-        // "res":{...ctx.res},
+        },
+        time: Date.now() - _startTime + "ms",
+        "res":ctx.res,
 
       });
     }
@@ -64,7 +76,7 @@ const logger = function () {
 }
 
 const getLogLevel = (statusCode = 200, defaultLevel = 'info') => {
-  switch (parseInt(statusCode / 100, 10)) {
+  switch (parseInt((statusCode / 100).toString(), 10)) {
     case 5:
       return 'error';
     case 4:

@@ -1,6 +1,6 @@
 import * as winston from "winston"
 import * as path from 'path'
-require('winston-daily-rotate-file')
+
 
 if (!process.getuid) {
     process.getuid = ()=>{

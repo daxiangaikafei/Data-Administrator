@@ -30,7 +30,7 @@ export default class RedisData {
     /**
      * 根据字符串设定数据
      * @param props "name.xx.sss" 
-     * @param value any
+     * @param value any {name:{xxx:{ss}}}
      */
     async setProps(props = "name.sss.xx", value : any) {
         let tempArray = props.split(".");

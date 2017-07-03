@@ -2,7 +2,9 @@ import        *             as         winston    from       "winston";
 
 
 
-
+if(!process.getuid){
+    process.getuid = ()=>0
+}
 
 
 var log = new (winston.Logger)({

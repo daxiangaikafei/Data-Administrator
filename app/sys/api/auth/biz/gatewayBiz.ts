@@ -61,7 +61,7 @@ export const pushRedis = (ctx, next) => {
             }
         })
         let gateWay = { routes }
-        let redisData = new RedisData("node-gateWay");
+        let redisData = new RedisData("localConfig");
         redisData.setData(gateWay);
         ctx.body = result.success();
     }).catch((error) => {

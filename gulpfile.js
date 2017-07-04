@@ -59,11 +59,11 @@ gulp.task("dev-config", function () {
 gulp.task("mv", function () {
     gulp
         .src("./dist/*")
-        .pipe(gulp.dest("./../qbao-bms/KoaServer/"));
+        .pipe(gulp.dest("./../qbao-bms/server/"));
 
     gulp
         .src("./package.json")
-        .pipe(gulp.dest("./../qbao-bms/KoaServer/"));
+        .pipe(gulp.dest("./../qbao-bms/server/"));
     //  gulp
     //     .src("./package-lock.json")
     //     .pipe(gulp.dest("./../release/KoaServer/"));
@@ -93,7 +93,7 @@ var mv = function(){
         runSequence("mv");
         clearInterval(timer)
     },10000)
-    var time =6;
+    var time =5;
     let timer = setInterval(function(){
         console.log("倒计时"+time);
         --time;

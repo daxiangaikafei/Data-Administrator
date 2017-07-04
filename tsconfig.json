@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "ES6",
     "allowJs":true,
-    "sourceMap": true,
+    // "sourceMap": true,
     // "noEmitOnError":false,
     // "alwaysStrict":false,
     "charset":"utf-8",

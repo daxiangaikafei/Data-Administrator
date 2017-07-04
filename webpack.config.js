@@ -1,6 +1,9 @@
 var webpack = require("webpack");
 const CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
 
+// const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const UglifyEsPlugin = require('uglify-es-webpack-plugin');
+
 var minSize = {
     minChunkSize: 51200,
     compress: {
@@ -10,7 +13,7 @@ var minSize = {
 function _externals() {
     let manifest = require('./package.json');
     let dependencies = manifest.dependencies;
-    // //console.log("啊哈",dependencies)
+    console.log("啊哈",dependencies)
     let externals = {};
     for (let p in dependencies) {
         
@@ -37,7 +40,7 @@ module.exports = {
         Buffer: false,
         setImmediate: false
     },
-    //devtool: "source-map", 
+    // devtool: "source-map", 
     output: {
         path: __dirname + "/dist",
         filename: "app.js",
@@ -71,14 +74,15 @@ module.exports = {
                 NODE_ENV: JSON.stringify("production")
             }
         }),
-        new webpack
-            .optimize
-            .UglifyJsPlugin({
-                compress: {
-                    drop_console: true,
-                    warnings: false
-                }
-            })
+        new UglifyEsPlugin()
+        // new webpack
+        //     .optimize
+        //     .UglifyJsPlugin({
+        //         compress: {
+        //             drop_console: true,
+        //             warnings: false
+        //         }
+        //     })
     ]
 
 };

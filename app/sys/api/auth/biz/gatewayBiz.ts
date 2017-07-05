@@ -52,17 +52,16 @@ export const getListByChannel = (ctx, next) => {
 export const pushRedis = (ctx, next) => {
     let result = new Result();
     return db.find({isGreatWall: true}).then(data=>{
-        console.log(data)
         let routes = {}
         data.map(obj => {
             routes[obj.url] = {
+                isGreatWall: obj.isGreatWall,
                 isLogin: obj.isLogin,
                 version: obj.version
             }
         })
-        let gateWay = { routes }
-        let redisData = new RedisData("node-gateWay");
-        redisData.setData(gateWay);
+        let redisData = new RedisData("localConfig");
+        redisData.setProps("gateway.routes", routes);
         ctx.body = result.success();
     }).catch((error) => {
         ctx.body = result.error(1,error.message);

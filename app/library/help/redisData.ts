@@ -17,7 +17,7 @@ export default class RedisData {
     private async saveData(data) {
         let baseData = await this.getDataAsync();
         let saveData = this.clone(baseData,data);
-        return redis.set(this.key, JSON.stringify(data));
+        return redis.set(this.key, JSON.stringify(saveData));
         // redis.expire(key,config.redis.expiration);
     }
     /**

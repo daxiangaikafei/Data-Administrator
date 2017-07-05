@@ -9,7 +9,8 @@
     "routes": {
     },
     "ignoreUrls": {
-        "/api/sys/v1/user/login":true
+        "/api/sys/v1/user/login":true,
+        "/api/sys/gateway/redis/push":true
     },
     "redis": {
         "tokenKey": "node-sys-token",

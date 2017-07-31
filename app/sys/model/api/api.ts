@@ -3,28 +3,14 @@ var moment = require("moment");
 
 var formate = "YYYY-MM-DD hhmmssSSS";
 
+
+// 网关列表
 var Schema = mongoose.Schema;
-var GatewaySchema = new Schema({
-    //
+var ApiSchema = new Schema({
     url :{
         type: String,
         required: true,
         maxlength: 300,
-    },
-    //是否可用
-    isUse:{
-        type: Boolean,
-        required: true
-    },
-    //是否拦截
-    isGreatWall: {
-        type: Boolean,
-        required: true
-    },
-    //是否登录
-    isLogin: {
-        type: Boolean,
-        require: true
     },
     //版本号
     version: {
@@ -32,11 +18,11 @@ var GatewaySchema = new Schema({
         required: true,
         maxlength: 30
     },
-    //项目
-    product: {
+    //请求方式
+    method: {
         type: String,
-        required: true,
-        maxlength: 30
+        default:"GET",
+        enum:["GET","POST","PUT","PATCH","DELETE","HEAD","OPTIONS"]
     },
     //描述
     description: {
@@ -44,18 +30,30 @@ var GatewaySchema = new Schema({
         required: true,
         maxlength: 300
     },
-    //文档地址
-    docmentUrl: {
-        type: String,
-        required: true,
-        maxlength: 100
+    todos:{
+        //是否可用
+        isUse:{
+            type: Boolean,
+            default:true,
+            required: true
+        },
+        //是否拦截
+        isGreatWall: {
+            type: Boolean,
+             default:false,
+            required: true
+        },
+        //是否登录
+        isLogin: {
+            type: Boolean,
+            default:false,
+            require: true
+        },
     },
-    //请求方式GET/POST/PUT/DELETE/
-    method: {
-        type: String,
-        required: true,
-        maxlength: 30
-    },
+    //项目id
+    productId:{ type: Schema.Types.ObjectId, ref:'Product' },
+    wordId:{ type: Schema.Types.ObjectId, ref:'ApiWord' },
+    
     createBy:{
         type:String,
         required:true,
@@ -84,6 +82,6 @@ var GatewaySchema = new Schema({
 });
 
 module.exports = {
-    Schema: GatewaySchema,
-    dataBasename: "Gateway"
+    Schema: ApiSchema,
+    dataBasename: "Api"
 }

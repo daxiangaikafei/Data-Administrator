@@ -3,8 +3,9 @@ var moment = require("moment");
 
 var formate = "YYYY-MM-DD hhmmssSSS";
 
+//项目id
 var Schema = mongoose.Schema;
-var BranchSchema = new Schema({
+var ProductSchema = new Schema({
     name:{
         type:String,
         required:true,
@@ -17,9 +18,15 @@ var BranchSchema = new Schema({
     },//密码
     prevId:{
         type:Schema.Types.ObjectId,
-        maxlength:40
+        ref:"Product",
+        required:false
     },
-    type:{ type: Schema.Types.ObjectId, ref:'Dictionary' },
+    sort:{
+        type:Number,
+        default:100
+    },
+    permissions:[{ type: Schema.Types.ObjectId, ref:'Permissions' }],
+    departments:[{ type: Schema.Types.ObjectId, ref:'Department' }],
     status:{
         type: Number,
         default: 0,
@@ -53,7 +60,7 @@ var BranchSchema = new Schema({
 });
 
 module.exports = {
-    Schema: BranchSchema,
-    dataBasename: "Branch"
+    Schema: ProductSchema,
+    dataBasename: "Product"
 
 }

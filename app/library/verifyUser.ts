@@ -122,11 +122,13 @@ class VerifyUser {
                 // ctx.userInfo = info;
                 ctx.state.userInfo = info;
                 return next();
-            }).catch(()=>{
-                result.error(200,"登录过期");
-                ctx.body = result.getValue();
-                return; 
             })
+            // }).catch((error)=>{
+            //     console.log(error)
+            //     result.error(200,"登录过期");
+            //     ctx.body = result.getValue();
+            //     return; 
+            // })
         }else{
             result.error(200,"未登陆");
             ctx.body = result.getValue();

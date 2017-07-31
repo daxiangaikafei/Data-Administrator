@@ -1,5 +1,5 @@
 FROM node
-COPY * /user/src/
+COPY * /auth/user/src/
 CMD npm i nrm -g
 CMD nrm use taobao
 CMD npm i typescript pm2 -g

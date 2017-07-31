@@ -4,6 +4,7 @@ var moment = require("moment");
 var formate = "YYYY-MM-DD hhmmssSSS";
 
 var Schema = mongoose.Schema;
+//字典表
 var DictionarySchema = new Schema({
     // menuTypes:[{
     //     name:String,
@@ -20,7 +21,7 @@ var DictionarySchema = new Schema({
         required:true,
         maxlength:30,
         minlength:1
-    },//Primary key
+    },//叫啥名字
     primarykey:{
         type:String,
         required:true,

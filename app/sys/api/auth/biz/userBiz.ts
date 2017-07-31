@@ -178,7 +178,6 @@ const getUserInfo = function(ctx,next){
 const getUsers = function(ctx,next){
     let result = new Result();
 
-    
     var populate = function(param,sort,currentPage,pageSize){
         return db.find(param).populate({
                 path:"userGroups",

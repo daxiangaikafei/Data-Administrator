@@ -76,7 +76,7 @@ gulp.task("production-build", function () {
 })
 
 gulp.task("dev-build", function () {
-    env = "production";
+    env = "development";
     runSequence("webpack", "dev-config", "mv");
     mv();
 

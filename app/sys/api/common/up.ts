@@ -11,9 +11,10 @@ const up = function(ctx, next,name:string) {
     let upData = ctx.request.body;
     let db = new DB(name);
     let result = new Result();
+     let id = ctx.params.id;
     upData.upBy = ctx.state.userInfo.userId;
     console.log(upData)
-    return db.update(upData._id, upData).then((data) => {
+    return db.update(id, upData).then((data) => {
         ctx.body = result.success();
     }).catch((error) => {
         ctx.body = result.error(1,error.message);

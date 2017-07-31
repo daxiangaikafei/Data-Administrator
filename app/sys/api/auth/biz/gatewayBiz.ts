@@ -51,7 +51,7 @@ export const getListByChannel = (ctx, next) => {
 
 export const pushRedis = (ctx, next) => {
     let result = new Result();
-    return db.find({isGreatWall: true}).then(data=>{
+    return db.find({$or:[{isGreatWall: true},{isLogin:false}]}).then(data=>{
         let routes = {}
         data.map(obj => {
             routes[obj.url] = {
@@ -61,7 +61,7 @@ export const pushRedis = (ctx, next) => {
             }
         })
         let redisData = new RedisData("localConfig");
-        redisData.setProps("gateway.routes", routes);
+        redisData.setProps("gateway.routes", routes,true);
         ctx.body = result.success();
     }).catch((error) => {
         ctx.body = result.error(1,error.message);

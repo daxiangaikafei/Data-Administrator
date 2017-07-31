@@ -3,27 +3,31 @@ var moment = require("moment");
 
 var formate = "YYYY-MM-DD hhmmssSSS";
 
-//分支公司
 var Schema = mongoose.Schema;
-var BranchSchema = new Schema({
-    name:{
-        type:String,
-        required:true,
-        maxlength:30,
-        minlength:1
-    },//用户名
-    description:{
-        type:String,
-        maxlength:300
-    },//密码
-    prevId:{
-        type:Schema.Types.ObjectId,
-        maxlength:40
+var ApiWordSchema = new Schema({
+    //url地址
+    url: {
+        type: String,
+        required: true,
+        maxlength: 100
     },
-    status:{
-        type: Number,
-        default: 0,
-        enum:[0,1,2,3,4,5,6,7]
+    //文档地址
+    docmentUrl: {
+        type: String,
+        required: true,
+        maxlength: 100
+    },
+    //请求方式GET/POST/PUT/DELETE/
+    method: {
+         type: String,
+        default:"GET",
+        enum:["GET","POST","PUT","PATCH","DELETE","HEAD","OPTIONS"]
+    },
+    //描述
+    description: {
+        type: String,
+        required: true,
+        maxlength: 300
     },
     createBy:{
         type:String,
@@ -53,7 +57,7 @@ var BranchSchema = new Schema({
 });
 
 module.exports = {
-    Schema: BranchSchema,
-    dataBasename: "Branch"
-
+    Schema: ApiWordSchema,
+    dataBasename: "ApiWord"
 }
+

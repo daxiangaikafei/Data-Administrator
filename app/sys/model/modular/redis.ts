@@ -39,7 +39,7 @@ var GatewaySchema = new Schema({
         maxlength: 30
     },
     //描述
-    describe: {
+    description: {
         type: String,
         required: true,
         maxlength: 300

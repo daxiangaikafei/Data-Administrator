@@ -46,7 +46,7 @@ app/config/env/developments.ts
 操作{info:"详情","list":"列表"...}
 
 比如  
-/user/xxxxxx/info   查用户详情
+/auth/user/xxxxxx/info   查用户详情
 /user  查用户列表
 
 
@@ -68,18 +68,18 @@ app/config/env/developments.ts
             "prefix": "/api/qbii",
             "timeout": 5000,
             "routes": {
-                "/user/userId": {
-                    "url": "/api/user/${userId}/userId",
+                "/auth/user/userId": {
+                    "url": "/api/auth/user/${userId}/userId",
                     "version": "v1",
                     "versions": ["v1", "v2", "v3"]
                 },
-                "/user/level": {
-                    "url": "/api/user/${userId}/level",
+                "/auth/user/level": {
+                    "url": "/api/auth/user/${userId}/level",
                     "version": "v1",
                     "versions": ["v1", "v2", "v3"]
                 },
-                "/user/userInfo": {
-                    "url": "/api/user/${userId}/userInfo",
+                "/auth/user/userInfo": {
+                    "url": "/api/auth/user/${userId}/userInfo",
                     "version": "v1",
                     "versions": ["v1", "v2", "v3"]
                 },
@@ -93,13 +93,13 @@ app/config/env/developments.ts
                     "version": "v1",
                     "versions": ["v1", "v2", "v3"]
                 },
-                "/user/userOrderList": {
-                    "url": "/api/user/${userId}/userOrderList.html",
+                "/auth/user/userOrderList": {
+                    "url": "/api/auth/user/${userId}/userOrderList.html",
                     "version": "v1",
                     "versions": ["v1", "v2", "v3"]
                 },
-                "/user/userProfitList": {
-                    "url": "/api/user/${userId}/userProfitList.html",
+                "/auth/user/userProfitList": {
+                    "url": "/api/auth/user/${userId}/userProfitList.html",
                     "version": "v1",
                     "versions": ["v1", "v2", "v3"]
                 },

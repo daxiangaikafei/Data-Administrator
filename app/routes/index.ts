@@ -4,13 +4,10 @@ import * as Router from "koa-router";
 // let routers_sys :Router = require("./../modular/sys/index");
 
 
-let routers_syss :Router = require("./../sys/api/auth/index");
+// let routers_syss :Router = require("./../sys/api/auth/index");
 
-let routes:Router[]= [
-	// routers_qbii,
-	// routers_good,
-	// routers_sys,
-	routers_syss
-];
-//module.exports = router
-module.exports = routes;
+import sysRoutes from "./../sys/routers"
+
+let routes:Router[]= sysRoutes;
+
+export default routes;

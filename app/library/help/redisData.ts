@@ -12,8 +12,6 @@ export default class RedisData {
      */
     constructor(key) {
         this.key = key;
-
-
     }
     private key : string;
     private forNum:number = 0;//props循环次数

@@ -49,11 +49,15 @@ var ApiSchema = new Schema({
             default:false,
             require: true
         },
+        isRouter: {
+            type: Boolean,
+            default:true,
+            require: true
+        }
     },
     //项目id
     productId:{ type: Schema.Types.ObjectId, ref:'Product' },
     wordId:{ type: Schema.Types.ObjectId, ref:'ApiWord' },
-    
     createBy:{
         type:String,
         required:true,

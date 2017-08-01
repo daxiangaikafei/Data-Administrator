@@ -12,7 +12,6 @@ import logger from "./library/log/logger"
 import RedisData from "./library/help/redisData";
 import routers from "./routes/index";
 
-console.log("routers",routers)
 
 const convert = require('koa-convert');
 
@@ -60,7 +59,7 @@ app.use((ctx, next) => {
             //  return;
         }
     }).catch(error => {
-        // console.error(error)
+        console.error(error)
         result.error(1000, "超时");
         ctx.body = result.getValue();
         logger.error("error", "", error);

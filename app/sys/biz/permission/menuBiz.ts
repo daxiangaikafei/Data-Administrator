@@ -21,9 +21,10 @@ export const getMenusByUser = function(ctx, next) {
                 //{createTime:"asc"}
                 return db.getModel().find({permissions:{"$in":permissions},isDel:0}).sort({sort:"asc"}).then((menus)=>{
                         // //console.log(menus)
-                        each(menus,function(value,index){
-                                //console.log("sort:"+value._doc.sort+" | createTime:"+value._doc.createTime  )
-                        })
+                        // each(menus,function(value,index){
+                        //         //console.log("sort:"+value._doc.sort+" | createTime:"+value._doc.createTime  )
+                        // })
+                        console.log("------")
                         ctx.body = result.success(buildMenuChild(menus)); 
                 })
         })

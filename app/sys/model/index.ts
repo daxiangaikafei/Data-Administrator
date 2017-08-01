@@ -36,16 +36,31 @@ class DB {
         })
 
     }
+    // update(id, updata) {
+    //     let model = this.Model;
+    //     updata.upTime = moment();
+    //     return new Promise(function(resolve, reject) {
+    //         model.findByIdAndUpdate({ _id: id }, { $set: updata }).then((data) => {
+    //             resolve(data);
+    //         }).catch((error) => {
+    //             reject(error);
+    //         });
+    //     });
+    // }
     update(id, updata) {
         let model = this.Model;
         updata.upTime = moment();
-        return new Promise(function(resolve, reject) {
-            model.findByIdAndUpdate({ _id: id }, { $set: updata }).then((data) => {
-                resolve(data);
-            }).catch((error) => {
-                reject(error);
-            });
-        });
+        return model.findOne({_id:id}).then((doc)=>{
+            doc.set(updata);
+            doc.save();
+        })
+        // return new Promise(function(resolve, reject) {
+        //     model.findByIdAndUpdate({ _id: id }, { $set: updata }).then((data) => {
+        //         resolve(data);
+        //     }).catch((error) => {
+        //         reject(error);
+        //     });
+        // });
     }
     getModel(){
         

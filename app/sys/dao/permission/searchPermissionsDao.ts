@@ -1,5 +1,5 @@
-import Result from "./../../../../library/help/result";
-import DB from "./../../../model/index";
+import Result from "./../..//../library/help/result";
+import DB from "./../../model/index";
 
 
 const result = new Result();

@@ -38,6 +38,7 @@ const logger = function () {
       userId = (ctx.state.useInfo && ctx.state.useInfo.userId) || "";
     } catch (error) {
       ctx.status = 500;
+      console.error(error);
       log.error(error.name, "...", {
         "pid": process.pid,
         "uid": process.getuid(),
@@ -48,7 +49,7 @@ const logger = function () {
         time: Date.now() - _startTime + "ms"
       })
       ctx.throw(error.Message, 500);
-      console.error(error);
+      
 
     } finally {
       log[getLogLevel(ctx.status)]("request", "....", {

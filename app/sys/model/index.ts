@@ -109,6 +109,7 @@ class DB {
             delete data.pageSize;
         }
         let { pageSize, currentPage } = page;
+        // console.log(arguments)
         // let pageInfo = new Promise((resolve, reject)=>{
         //     resolve({
         //         currentPage: currentPage,

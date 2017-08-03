@@ -66,7 +66,8 @@ var TodoSchema = new Schema({
     }
 });
 
-module.exports = {
-    Schema: TodoSchema,
-    dataBasename: "Todo"
-}
+// module.exports = {
+//     Schema: TodoSchema,
+//     dataBasename: "Todo"
+// }
+module.exports = mongoose.model('Todo', TodoSchema);

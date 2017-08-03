@@ -57,8 +57,8 @@ var UserGroupSchema = new Schema({
     }
 });
 
-module.exports = {
-    Schema: UserGroupSchema,
-    dataBasename: "UserGroup"
-
-}
+// module.exports = {
+//     Schema: UserGroupSchema,
+//     dataBasename: "UserGroup"
+// }
+module.exports = mongoose.model('UserGroup', UserGroupSchema);

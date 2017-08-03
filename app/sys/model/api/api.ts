@@ -85,7 +85,8 @@ var ApiSchema = new Schema({
     }
 });
 
-module.exports = {
-    Schema: ApiSchema,
-    dataBasename: "Api"
-}
+// module.exports = {
+//     Schema: ApiSchema,
+//     dataBasename: "Api"
+// }
+module.exports = mongoose.model('Api', ApiSchema);

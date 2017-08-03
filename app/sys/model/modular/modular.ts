@@ -72,7 +72,8 @@ var ModularSchema = new Schema({
     }
 });
 
-module.exports = {
-    Schema: ModularSchema,
-    dataBasename: "Modular"
-}
+// module.exports = {
+//     Schema: ModularSchema,
+//     dataBasename: "Modular"
+// }
+module.exports = mongoose.model('Modular', ModularSchema);

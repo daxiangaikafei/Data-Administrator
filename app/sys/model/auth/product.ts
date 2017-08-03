@@ -59,8 +59,8 @@ var ProductSchema = new Schema({
     }
 });
 
-module.exports = {
-    Schema: ProductSchema,
-    dataBasename: "Product"
-
-}
+// module.exports = {
+//     Schema: ProductSchema,
+//     dataBasename: "Product"
+// }
+module.exports = mongoose.model('Product', ProductSchema);

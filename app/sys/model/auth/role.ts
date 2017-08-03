@@ -53,8 +53,8 @@ var RoleSchema = new Schema({
     }
 });
 
-module.exports = {
-    Schema: RoleSchema,
-    dataBasename: "Role"
-
-}
+// module.exports = {
+//     Schema: RoleSchema,
+//     dataBasename: "Role"
+// }
+module.exports = mongoose.model('Role', RoleSchema);

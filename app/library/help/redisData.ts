@@ -28,7 +28,13 @@ export default class RedisData {
      * 获取数据
      */
     async getDataAsync() {
-        let result = JSON.parse(await redis.get(this.key))||{};
+        let result;
+        try{
+            result = JSON.parse(await redis.get(this.key))||{};
+        }catch(err){
+            result = {};
+        }
+        // let result = JSON.parse(await redis.get(this.key))||{};
         return result;
     }
     /**

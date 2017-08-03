@@ -69,6 +69,9 @@ import * as userGroup from "./biz/userGroupBiz";
 
 router.get("/v1/auth/userGroup", userGroup.getList);
 
+import * as apiBiz from './biz/apiBiz';
+router.get("/v1/api/api", apiBiz.getList)
+
 import * as gateway from './biz/gatewayBiz'
 //网关相关接口
 router.get("/modular/gateway", gateway.getList)

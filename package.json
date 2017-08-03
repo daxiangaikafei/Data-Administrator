@@ -21,7 +21,7 @@
     "@types/koa-logger": "^2.0.2",
     "@types/koa-router": "^7.0.22",
     "@types/lodash": "^4.14.61",
-    "@types/mongoose": "^4.7.12",
+    "@types/mongoose": "^4.7.19",
     "@types/node": "^7.0.12",
     "@types/webpack": "^2.2.15",
     "@types/winston": "^2.3.0",
@@ -51,7 +51,7 @@
     "lodash": "^4.17.2",
     "moment": "^2.18.1",
     "mongodb": "^2.2.27",
-    "mongoose": "^4.9.9",
+    "mongoose": "^4.11.5",
     "redis": "^2.7.1",
     "winston": "^2.3.1"
   }

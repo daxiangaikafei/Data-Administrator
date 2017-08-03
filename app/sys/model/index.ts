@@ -1,14 +1,18 @@
-// var mongoose = require('mongoose');
-import * as mongoose from "mongoose";
+var mongoose = require('mongoose');
+// import * as mongoose from "mongoose";
 import * as moment from "moment";
-var _ = require("lodash");
+import * as _ from "lodash";
+
 const { monogodb } = require("./../../../config/index");
-mongoose.connect('mongodb://' + monogodb.ip + ":" + monogodb.port + '/temp1', function(error) {
+mongoose.Promise = global.Promise;
+mongoose.connect('mongodb://' + monogodb.ip + ":" + monogodb.port + '/temp1',{"useMongoClient":true},function(error) {
     // body...
     if (error) {
         //console.log("连接数据库 出错", error);
     }
 });
+
+require ("./auth/dictionary");
 
 class DB {
     private  Model
@@ -16,8 +20,8 @@ class DB {
         let model = require("./" + path);
         // console.error("path:",path)
         //let a:mongoose.model ;
-        this.Model = mongoose.model(model.dataBasename, model.Schema);
-
+        // this.Model = mongoose.model(model.dataBasename, model.Schema);
+        this.Model = model
         this.save = this.save.bind(this);
         this.remove = this.remove.bind(this);
         this.update = this.update.bind(this);

@@ -1,13 +1,14 @@
 import * as  Router from "koa-router";
 const router: Router = new Router();
-router.prefix("/api/sys");
+router.prefix("/api/sys/modular");
 
 
 import * as redis from "./../../biz/modular/redis";
  
 
-router.get("/redis/:key",redis.getData);
-router.put("/redis/:key",redis.upData);
+router.get("/v1/redis/:key",redis.getData);
+router.put("/v1/redis/:key",redis.upData);
+router.post("/v1/redis/:key",redis.saveData);
 
 
-module.exports = router;
+export default router;

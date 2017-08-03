@@ -81,8 +81,8 @@ var UserSchema = new Schema({
     }
 });
 
-module.exports = {
-    Schema: UserSchema,
-    dataBasename: "User"
-
-}
+// module.exports = {
+//     Schema: UserSchema,
+//     dataBasename: "User"
+// }
+module.exports = mongoose.model('User', UserSchema);

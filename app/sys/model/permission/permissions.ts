@@ -59,7 +59,8 @@ var PermissionsSchema = new Schema({
     }
 });
 
-module.exports = {
-    Schema: PermissionsSchema,
-    dataBasename: "Permissions"
-}
+// module.exports = {
+//     Schema: PermissionsSchema,
+//     dataBasename: "Permissions"
+// }
+module.exports = mongoose.model('Permissions', PermissionsSchema);

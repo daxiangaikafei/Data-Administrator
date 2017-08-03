@@ -61,8 +61,9 @@ var MenuSchema = new Schema({
     }
 });
 
-module.exports = {
-    Schema: MenuSchema,
-    dataBasename: "Menu"
+// module.exports = {
+//     Schema: MenuSchema,
+//     dataBasename: "Menu"
+// }
 
-}
+module.exports = mongoose.model('Menu', MenuSchema);

@@ -83,7 +83,8 @@ var GatewaySchema = new Schema({
     }
 });
 
-module.exports = {
-    Schema: GatewaySchema,
-    dataBasename: "Gateway"
-}
+// module.exports = {
+//     Schema: GatewaySchema,
+//     dataBasename: "Gateway"
+// }
+module.exports = mongoose.model('Gateway', GatewaySchema);

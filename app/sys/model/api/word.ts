@@ -56,8 +56,9 @@ var ApiWordSchema = new Schema({
     }
 });
 
-module.exports = {
-    Schema: ApiWordSchema,
-    dataBasename: "ApiWord"
-}
+// module.exports = {
+//     Schema: ApiWordSchema,
+//     dataBasename: "ApiWord"
+// }
 
+module.exports = mongoose.model('ApiWord', ApiWordSchema);

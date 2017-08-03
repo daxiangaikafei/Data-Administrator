@@ -81,8 +81,10 @@ var DictionarySchema = new Schema({
     }
 });
 
-module.exports = {
-    Schema: DictionarySchema,
-    dataBasename: "Dictionary"
+// module.exports = {
+//     Schema: DictionarySchema,
+//     dataBasename: "Dictionary"
 
-}
+// }
+
+module.exports = mongoose.model('Dictionary', DictionarySchema);

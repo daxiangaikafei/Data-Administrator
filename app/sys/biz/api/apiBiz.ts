@@ -11,9 +11,7 @@ const getList = function (ctx, next) {
 
     var populate = function(param,sort,currentPage,pageSize){
         return db.find(param).populate({
-            path:"productId",
-            select:"name",
-            match: { isDel: 0 },
+            path:"productId"
         }).sort(sort).skip((currentPage) * pageSize).limit(pageSize)
     }
 

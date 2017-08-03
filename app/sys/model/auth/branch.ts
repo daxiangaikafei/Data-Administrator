@@ -52,8 +52,9 @@ var BranchSchema = new Schema({
     }
 });
 
-module.exports = {
-    Schema: BranchSchema,
-    dataBasename: "Branch"
+// module.exports = {
+//     Schema: BranchSchema,
+//     dataBasename: "Branch"
 
-}
+// }
+module.exports = mongoose.model('Branch', BranchSchema);

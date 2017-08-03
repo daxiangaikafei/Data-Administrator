@@ -62,5 +62,4 @@ var ProductSchema = new Schema({
 module.exports = {
     Schema: ProductSchema,
     dataBasename: "Product"
-
 }

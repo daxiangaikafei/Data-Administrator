@@ -4,13 +4,14 @@ import {each,isArray,isObjectLike} from "lodash";
 import DB from "./../../model/index";
 const db = new DB("auth/userGroup");
 
-const result = new Result();
+// const result = new Result();
+
+import Error from "./../../../library/help/error";
+const error = new Error("roleBiz");
 
 
-
-
-//获取所有菜单
-export const getList = function(ctx, next) {
+//
+export const getList = function(userGroup) {
 
     
     var populate = function(param,sort,currentPage,pageSize){
@@ -20,10 +21,12 @@ export const getList = function(ctx, next) {
             select:"name"
         }).sort(sort).skip((currentPage) * pageSize).limit(pageSize)
     }
-    return db.findByPage(ctx.query,{},{},populate).then((data:any) => {
-                ctx.body = result.success(data);
-            }).catch((error) => {
-                ctx.body = result.error(1,error.message);
+    return db.findByPage(userGroup,{},{},populate).then((data:any) => {
+                // ctx.body = result.success(data);
+                return data;
+            }).catch((err) => {
+                 throw error.set(1, err.message);
+                // ctx.body = result.error(1,error.message);
             });
 }
 //getPermissions();

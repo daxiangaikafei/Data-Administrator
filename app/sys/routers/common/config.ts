@@ -9,7 +9,8 @@ export default {
         remove: true,
         up: true,
         find: true,
-        findByPage: true
+        findByPage: true,
+        like:["id","name"]
     },
     "auth/department": {
         name: "department",
@@ -21,7 +22,8 @@ export default {
         remove: true,
         up: true,
         find: true,
-        findByPage: true
+        findByPage: true,
+        like:["id","name"]
     },
 
     "auth/role": {
@@ -34,7 +36,8 @@ export default {
         remove: true,
         up: true,
         find: true,
-        findByPage: false
+        findByPage: false,
+        like:["id","name"]
     },
     "auth/user": {
         name: "auth/user",
@@ -44,7 +47,8 @@ export default {
         remove: true,
         up: false,
         find: false,
-        findByPage: false
+        findByPage: false,
+        like:["id","name"]
     },
     "auth/userGroup": {
         name: "auth/userGroup",
@@ -56,7 +60,8 @@ export default {
         remove: true,
         up: true,
         find: true,
-        findByPage: true
+        findByPage: true,
+        like:["id","name"]
     },
     "auth/dictionary": {
         name: "auth/dictionary",
@@ -68,7 +73,8 @@ export default {
         remove: true,
         up: true,
         find: true,
-        findByPage: true
+        findByPage: true,
+        like:["id","name"]
     },
     "auth/product": {
         name: "auth/product",
@@ -80,7 +86,8 @@ export default {
         remove: true,
         up: true,
         find: true,
-        findByPage: true
+        findByPage: true,
+        like:["id","name"]
     },
     "permission/permissions": {
         name: "permission/permissions",
@@ -92,7 +99,8 @@ export default {
         remove: true,
         up: true,
         find: true,
-        findByPage: true
+        findByPage: true,
+        like:["id","name"]
     },
     "permission/todo": {
         name: "permission/todo",
@@ -104,7 +112,8 @@ export default {
         remove: true,
         up: true,
         find: true,
-        findByPage: true
+        findByPage: true,
+        like:["id","name"]
     },
     "permission/menu": {
         name: "permission/menu",
@@ -116,7 +125,8 @@ export default {
         remove: true,
         up: true,
         find: false,
-        findByPage: true
+        findByPage: true,
+        like:["id","name"]
     },
     "modular/modular": {
         name: "modular",
@@ -128,7 +138,8 @@ export default {
         remove: true,
         up: true,
         find: true,
-        findByPage: true
+        findByPage: true,
+        like:["id","name"]
     },
     "modular/gateway": {
         name: "modular/gateway",
@@ -140,7 +151,8 @@ export default {
         remove: true,
         up: true,
         find: true,
-        findByPage: true
+        findByPage: true,
+        like:["id","name"]
     },
     "api/api": {
         name: "api/api",
@@ -152,7 +164,8 @@ export default {
         remove: true,
         up: true,
         find: true,
-        findByPage: true
+        findByPage: true,
+        like:["id","name"]
     },
     "api/word": {
         name: "api/word",
@@ -164,7 +177,8 @@ export default {
         remove: true,
         up: true,
         find: true,
-        findByPage: true
+        findByPage: true,
+        like:["id","name"]
     },
     
 }

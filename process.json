@@ -5,9 +5,11 @@
     "instances" : 4,
     "exec_mode" : "cluster",
     "watch"       : true,
-    "ignore_watch":"*.log",
+    "ignore_watch":["*.log","node_modules","log"],
     "err_file"    : "yms.log",
     "out_file"    : "yms.log",
+    "autorestart" : true,
+    "restart_delay" :3,
     "env": {
       "NODE_ENV": "production"
     }

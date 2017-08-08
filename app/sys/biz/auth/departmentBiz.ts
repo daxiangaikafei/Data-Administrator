@@ -1,16 +1,16 @@
-
-import Result from "./../../../library/help/result";
 import DB from "./../../model/index";
 
 const db = new DB("auth/department");
 
 import {each} from "lodash";
 
-export const getList = function(ctx, next) {
-    
-     let {id} = ctx.params;
-        let result = new Result();
+import Error from "./../../../library/help/error";
+const error = new Error("userBiz");
 
+export const getList = function(department) {
+    
+    //  let {id} = ctx.params;
+        
     
     var populate = function(param,sort,currentPage,pageSize){
         return db.find(param).populate({
@@ -19,18 +19,20 @@ export const getList = function(ctx, next) {
             select:"name"
         }).sort(sort).skip((currentPage) * pageSize).limit(pageSize)
     }
-    return db.findByPage(ctx.query,{},{},populate).then((data:any) => {
-                ctx.body = result.success(data);
-            }).catch((error) => {
-                ctx.body = result.error(1,error.message);
+    return db.findByPage(department,{},{},populate).then((data:any) => {
+                // ctx.body = result.success(data);
+                return data;
+            }).catch((err) => {
+                 throw error.set(1, err.message);
+                // ctx.body = result.error(1,error.message);
             });
 
 } 
 
 import {getAll} from "./branchBiz";
 
-export const getSelectData = function(ctx,next){
-    let result = new Result();
+export const getSelectData = function(){
+    
     return Promise.all([getAll(),db.getModel().find()]).then((results)=>{
         let branchs = results[0];
         let departments = results[1];
@@ -50,6 +52,7 @@ export const getSelectData = function(ctx,next){
             newA.push(value)
             return value;
         });
-        ctx.body = result.success(newA);
+        return newA;
+        // ctx.body = result.success(newA);
     })
 }

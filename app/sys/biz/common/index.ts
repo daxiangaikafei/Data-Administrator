@@ -1,9 +1,9 @@
-import save from "./save";
-import find,{findById} from "./find";
-import remove from "./remove";
-import up from "./up";
-import sort from "./sort";
-import findByPage from "./findByPage";
+import save from "./saveBiz";
+import find,{findById} from "./findBiz";
+import remove from "./removeBiz";
+import up from "./upBiz";
+import sort from "./sortBiz";
+import findByPage from "./findByPageBiz";
 
 export default {
     save,find,sort,up,remove,findByPage,findById

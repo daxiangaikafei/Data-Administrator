@@ -3,7 +3,7 @@ const router: Router = new Router();
 router.prefix("/api/sys/modular");
 
 
-import * as redis from "./../../biz/modular/redis";
+import * as redis from "./redis";
  
 
 router.get("/v1/redis/:key",redis.getData);

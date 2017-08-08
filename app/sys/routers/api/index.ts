@@ -4,8 +4,8 @@ import * as Router from "koa-router";
 const router: Router = new Router();
 router.prefix("/api/sys");
 
-import apiBiz from './../../biz/api/apiBiz'
+import api from './api'
 
-router.get("/v1/api/api", apiBiz.getList);
+router.get("/v1/api/api", api.getList);
 
 export default router;

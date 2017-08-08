@@ -23,7 +23,7 @@
     "node_modules",
     "build",
     "dist",
-    "app/sys/api/auth/children/*",
+    "app/sys/api/*",
     "*.js"
   ]
   // "include": [

@@ -6,6 +6,9 @@ import RedisData from "./../../../library/help/redisData";
 
 
 const db = new DB("modular/gateway");
+import Error from "./../../../library/help/error";
+const error = new Error("roleBiz");
+
 
 //获取所有列表
 export const getList = function (ctx, next) {

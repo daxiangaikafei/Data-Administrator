@@ -1,12 +1,13 @@
-import Result from "./../../../library/help/result";
-
 import {findUserByPerssions} from "./../../dao/permission/searchPermissionsDao";
 
 import {each,isArray,isObjectLike} from "lodash";
 import DB from "./../../model/index";
 const db = new DB("permission/permissions");
 
-const result = new Result();
+import Error from "./../../../library/help/error";
+const error = new Error("roleBiz");
+
+
 
 //const 
 
@@ -75,7 +76,7 @@ var getNameByMap ={
 
 
 //获取所有菜单
-export const getList = function(ctx, next) {
+export const getList = function(permissions) {
 
     
     var populate = function(param,sort,currentPage,pageSize){
@@ -84,10 +85,11 @@ export const getList = function(ctx, next) {
             match: { isDel:0}
         }).sort(sort).skip((currentPage) * pageSize).limit(pageSize)
     }
-    return db.findByPage(ctx.query,{},{},populate).then((data:any) => {
-                ctx.body = result.success(data);
-            }).catch((error) => {
-                ctx.body = result.error(1,error.message);
-            });
+    return db.findByPage(permissions,{},{},populate).then((data:any) => {
+                // ctx.body = result.success(data);
+                return data;
+            }) .catch((err) => {
+        throw error.set(1, err.message);
+    });
 }
 //getPermissions();

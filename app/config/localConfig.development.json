@@ -10,7 +10,8 @@
     },
     "ignoreUrls": {
         "/api/sys/v1/auth/user/login":true,
-        "/api/sys/gateway/redis/push":true
+        "/api/sys/gateway/redis/push":true,
+        "/api/sys/db/auth/user/up":true
     },
     "redis": {
         "tokenKey": "node-sys-token",

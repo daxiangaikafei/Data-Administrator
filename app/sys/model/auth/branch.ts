@@ -11,11 +11,11 @@ var BranchSchema = new Schema({
         required:true,
         maxlength:30,
         minlength:1
-    },//用户名
+    },
     description:{
         type:String,
         maxlength:300
-    },//密码
+    },
     prevId:{
         type:Schema.Types.ObjectId,
         maxlength:40

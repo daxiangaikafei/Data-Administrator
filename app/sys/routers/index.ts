@@ -5,6 +5,8 @@ import permissionRoutes from "./permission";
 import  modularRoutes from "./modular";
 import apiRoutes from './api';
 
+
+console.log(commonRoutes)
 export default [
     authRouters,
     commonRoutes,

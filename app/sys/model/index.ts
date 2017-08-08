@@ -12,7 +12,7 @@ mongoose.connect('mongodb://' + monogodb.ip + ":" + monogodb.port + '/temp1',{"u
     }
 });
 
-require ("./auth/dictionary");
+// require ("./auth/dictionary");
 
 class DB {
     private  Model
@@ -28,16 +28,14 @@ class DB {
         this.find = this.find.bind(this);
         this.getModel = this.getModel.bind(this);
     }
-    save(data) {
+    async save(data) {
 
         var entity = new this.Model(data);
-        return new Promise(function(resolve, reject) {
-            entity.save().then((data) => {
-                resolve(data);
-            }).catch((error) => {
-                reject(error);
-            });
-        })
+        return entity
+            .save()
+            .then((data) => {
+                return data;
+            })
 
     }
     // update(id, updata) {
@@ -96,7 +94,15 @@ class DB {
             });
         });
     }
-    findByPage(data ?:any, sort ?:any, page ?:any,populatePromise?:any) {
+    /**
+     * 
+     * @param data 具体查询对象
+     * @param sort 排序呢对象
+     * @param page 翻页对象 { pageSize: 10, currentPage: 1 }
+     * @param populatePromise 
+     * @param filter 过滤字段 {isDel:0,createTime:0,createBy:0,upBy:0,__v:0} 0w为过滤 1为只要
+     */
+    findByPage(data ?:any, sort ?:any, page ?:any,populatePromise?:any,filter={isDel:0,createTime:0,createBy:0,upBy:0,__v:0}) {
         data = Object.assign({},DATA_SEARCH_DEFAULT,data);
         sort = Object.assign({},{ "_id": "desc" },sort);
         page = Object.assign({},{ pageSize: 10, currentPage: 1 },page)
@@ -109,15 +115,7 @@ class DB {
             delete data.pageSize;
         }
         let { pageSize, currentPage } = page;
-        // console.log(arguments)
-        // let pageInfo = new Promise((resolve, reject)=>{
-        //     resolve({
-        //         currentPage: currentPage,
-        //         pageSize: pageSize,
-        //     })
-        // })
-        // return Promise.all([model.find(data).sort(sort).count(), model.find(data).sort(sort).skip((currentPage - 1) * pageSize).limit(pageSize),pageInfo])
-        return Promise.all([model.find(data).count(),populatePromise?populatePromise(data,sort,currentPage-1,pageSize):model.find(data).sort(sort).skip((currentPage - 1) * pageSize).limit(pageSize)])
+        return Promise.all([model.find(data,filter).count(),populatePromise?populatePromise(data,sort,currentPage-1,pageSize):model.find(data).sort(sort).skip((currentPage - 1) * pageSize).limit(pageSize)])
         // return Promise.all([model.find(data).sort(sort).count(), model.find(data).sort(sort).skip((currentPage - 1) * pageSize).limit(pageSize)])
             .then(function(results) {
                 //console.log(results);
@@ -132,7 +130,13 @@ class DB {
                 }
             });
     }
-    find(data ?: any, sort ?:any) {
+    /**
+     * 
+     * @param data 具体查询对象
+     * @param sort 排序对象 { "_id": "desc" }
+     * @param filter 过滤字段 {isDel:0,createTime:0,createBy:0,upBy:0,__v:0} 0w为过滤 1为只要
+     */
+    find(data ?: any, sort ?:any,filter={isDel:0,createTime:0,createBy:0,upBy:0,__v:0}) {
         data = Object.assign({},DATA_SEARCH_DEFAULT,data);
         sort = Object.assign({},{ "_id": "desc" },sort);
         let model = this.Model;
@@ -140,14 +144,7 @@ class DB {
             delete data.currentPage;
             delete data.pageSize;
         }
-        return model.find(data).sort(sort);
-        // return new Promise(function(resolve, reject) {
-        //     model.find(data).sort(sort).then((data, aa, bbaa) => {
-        //         resolve(data);
-        //     }).catch((error) => {
-        //         reject(error);
-        //     });
-        // });
+        return model.find(data,filter).sort(sort);
     }
 }
 

@@ -60,7 +60,11 @@ app.use((ctx, next) => {
         }
     }).catch(error => {
         console.error(error)
-        result.error(1000, "超时");
+        if(error.code!==undefined){
+             result.setError(error);
+        }else{
+             result.error(1, error.message);
+        }
         ctx.body = result.getValue();
         logger.error("error", "", error);
     });

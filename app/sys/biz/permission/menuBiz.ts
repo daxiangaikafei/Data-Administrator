@@ -1,7 +1,11 @@
 import Token from "./../../../library/help/token";
 import VerifyUser from "./../../../library/verifyUser";
-import Result from "./../../../library/help/result";
+// import Result from "./../../../library/help/result";
 import DB from "./../../model/index";
+
+import Error from "./../../../library/help/error";
+const error = new Error("roleBiz");
+
 
 const db = new DB("permission/menu");
 
@@ -9,40 +13,51 @@ import * as _ from "lodash";
 import {getPermissions} from "./permissionsBiz";
 let verifyUser = new VerifyUser();
 
-//获取用户权限
-export const getMenusByUser = function(ctx, next) {
 
-     let result = new Result();
+/**
+ * 获取当前用户的所有菜单
+ * @param userInfo 
+ */
+export const getMenusByUser = function(userInfo={userId:""}) {
 
-   
-        // //console.log(userInfo)
-        // let userId = "592f722aee8b265e8287f1af";
-        return getPermissions(ctx.state.userInfo.userId).then((permissions)=>{
-                //{createTime:"asc"}
+        return getPermissions(userInfo.userId).then((permissions)=>{
                 return db.getModel().find({permissions:{"$in":permissions},isDel:0}).sort({sort:"asc"}).then((menus)=>{
-                        // //console.log(menus)
-                        // each(menus,function(value,index){
-                        //         //console.log("sort:"+value._doc.sort+" | createTime:"+value._doc.createTime  )
-                        // })
-                        console.log("------")
-                        ctx.body = result.success(buildMenuChild(menus)); 
-                })
-        })
-    
-     
+                        
+                        return buildMenuChild(menus);
+                }).catch((err) => {
+                        throw error.set(1, err.message);
+                });
+        });
 }
 
 //获取所有菜单
-export const getMenus = function(ctx, next) {
-
-     let result = new Result();
-     
-        return db.findByPage(ctx.query).then((menus)=>{
-                // //console.log(menus)
-                ctx.body = result.success(menus);
-        })
+export const getMenus = function(menu) {
+        return db.findByPage(menu).then((menus)=>{
+                return menus;
+        }).catch((err) => {
+                throw error.set(1, err.message);
+        });
 }
-import {each} from "lodash";
+
+
+
+
+
+//获取所有菜单
+export const getMenuPermissions = function(id) {
+    
+ 
+     return db.getModel().findOne({_id: id,isDel:0}).populate({
+                path:"permissions"
+            }).then((data)=>{
+                return data;
+            }).catch((err) => {
+                throw error.set(1, err.message);
+           });
+
+}
+
+
 
 let buildMenuChild = function (menus:any){
         // if(menus)
@@ -101,7 +116,7 @@ let buildMenuChild = function (menus:any){
                 let map = {};
                 // 592fe5e49e15aa47aa70a127  prevId 592fb06af11f4783031255a5
                 //console.log("id",parent)
-                each(parent,function(value,index){
+                _.each(parent,function(value,index){
                         if(maps[value._id]){
                                 let children = forEnd( maps[value._id],maps);
                                 value.childrens = children;
@@ -115,29 +130,9 @@ let buildMenuChild = function (menus:any){
         return a;
 }
 
- 
-
-
-
  var getChildsById = function(id,childrens){
         if(!childrens||childrens.length===0){
                 return false;
         }
         return childrens[id];
-}
-
-
-
-//获取所有菜单
-export const getMenuPermissions = function(ctx, next) {
-    
-     let {id} = ctx.params;
-     let result = new Result();
-     return db.getModel().findOne({_id: id,isDel:0}).populate({
-                path:"permissions"
-            }).then((data)=>{
-                //console.log(data);
-                ctx.body = result.success(data.permissions);
-            })
-
 }

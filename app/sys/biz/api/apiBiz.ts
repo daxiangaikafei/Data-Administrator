@@ -5,19 +5,23 @@ import RedisData from "./../../../library/help/redisData";
 
 const db = new DB("api/api");
 
+
 //获取所有列表
 const getList = function (ctx, next) {
     let result = new Result();
 
     var populate = function(param,sort,currentPage,pageSize){
         return db.find(param).populate({
-            path:"productId"
+            path:"productId",
+            select:"name",
+            // match: { isDel:0}
         }).sort(sort).skip((currentPage) * pageSize).limit(pageSize)
     }
 
-    return db.findByPage(ctx.query,{},{},populate).then((data) => {
-        console.log(data)
+    return db.findByPage(ctx.query, {}, {}, populate).then((data) => {
         ctx.body = result.success(data)
+    }).catch((error)=>{
+        console.error(error)
     })
 }
 

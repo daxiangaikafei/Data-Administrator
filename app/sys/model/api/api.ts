@@ -3,6 +3,7 @@ var moment = require("moment");
 
 var formate = "YYYY-MM-DD hhmmssSSS";
 
+import "./../auth/product";
 
 // 网关列表
 var Schema = mongoose.Schema;

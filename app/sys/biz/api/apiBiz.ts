@@ -15,7 +15,7 @@ const getList = function (ctx, next) {
         }).sort(sort).skip((currentPage) * pageSize).limit(pageSize)
     }
 
-    return db.findByPage(ctx.query, {}, populate).then((data) => {
+    return db.findByPage(ctx.query,{},{},populate).then((data) => {
         console.log(data)
         ctx.body = result.success(data)
     })

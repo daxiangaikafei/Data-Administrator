@@ -13,6 +13,7 @@ router.prefix("/api/sys");
 
 let baseUrl = "/db/";   
 for (let key in apis) {
+    
     let url = baseUrl + apis[key]["prefix"];
     let path = apis[key].path;
     //console.log("path",path)

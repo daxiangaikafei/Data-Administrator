@@ -32,7 +32,8 @@ const save = async function (ctx, next, config) {
     if (hasProps) {
         let data = await Biz.find(newO, config);
         if (data.length === 0) {
-            ctx.body = result.success();
+            let info = await Biz.save(saveData,config)
+            ctx.body = result.success(info); 
             return
         } else {
             ctx.body = result.error(1, "无法重复创建");

@@ -5,7 +5,7 @@ class Error {
     constructor(whoami:string) {
         this.code = 1;
         this.message = "";
-        this.whoami = "";
+        this.whoami = whoami;
         this.getValue = this.getValue.bind(this);
     }
     private code : number;

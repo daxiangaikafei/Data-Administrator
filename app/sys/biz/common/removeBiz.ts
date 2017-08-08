@@ -10,6 +10,7 @@ const error = new Error("userBiz");
 //删除
 const remove = function(id,userInfo,name:string) {
     let db = new DB(name);
+    
     return db.remove(id,{upBy:userInfo.userId}).then((data) => {
         return data;
     }).catch((err) => {

@@ -65,7 +65,6 @@ class DB {
         // });
     }
     getModel(){
-        
         return this.Model;
     }
     remove(id,param) {

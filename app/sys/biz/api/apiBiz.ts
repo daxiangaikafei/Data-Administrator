@@ -18,6 +18,7 @@ const getList =  function (apiInfo) {
         }).sort(sort).skip((currentPage) * pageSize).limit(pageSize)
     }
 
+
     return db.findByPage(apiInfo, {},{}, populate).then((data) => {
         return data;
     }).catch((err)=>{

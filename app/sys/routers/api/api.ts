@@ -10,6 +10,14 @@ const getList = async function (ctx, next) {
     ctx.body = result.success(data);
 }
 
+const pushRedis = async function(ctx, next) {
+    let result = new Result();
+    
+    let data = await Biz.pushRedis();
+    ctx.body = result.success(data);
+}
+
 export default  {
-    getList
+    getList,
+    pushRedis
 }

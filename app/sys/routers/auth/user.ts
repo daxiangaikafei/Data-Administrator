@@ -83,13 +83,14 @@ const getUserInfo = async function (ctx, next) {
     ctx.body = result.error(1, "呵呵")
 }
 
-const registered = function(ctx, next) {
+const registered = async function(ctx, next) {
     let result = new Result();
     let saveData = ctx.request.body;
     saveData.createBy =  ctx.state.userInfo.userId;
     saveData.upBy = ctx.state.userInfo.userId;
     
-    return Biz.save(saveData); 
+    await Biz.save(saveData);
+    ctx.body = result.success();
 }
 
 const upUser = async function (ctx, next) {

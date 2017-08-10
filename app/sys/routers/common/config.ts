@@ -10,7 +10,7 @@ export default {
         up: true,
         find: true,
         findByPage: true,
-        like:["id","name"]
+        like:["_id","name"]
     },
     "auth/department": {
         name: "department",
@@ -23,7 +23,7 @@ export default {
         up: true,
         find: true,
         findByPage: true,
-        like:["id","name"]
+        like:["_id","name"]
     },
 
     "auth/role": {
@@ -37,7 +37,7 @@ export default {
         up: true,
         find: true,
         findByPage: false,
-        like:["id","name"]
+        like:["_id","name"]
     },
     "auth/user": {
         name: "auth/user",
@@ -48,7 +48,7 @@ export default {
         up: false,
         find: false,
         findByPage: false,
-        like:["id","name"]
+        like:["_id","name"]
     },
     "auth/userGroup": {
         name: "auth/userGroup",
@@ -61,7 +61,7 @@ export default {
         up: true,
         find: true,
         findByPage: true,
-        like:["id","name"]
+        like:["_id","name"]
     },
     "auth/dictionary": {
         name: "auth/dictionary",
@@ -74,7 +74,7 @@ export default {
         up: true,
         find: true,
         findByPage: true,
-        like:["id","name"]
+        like:["_id","name"]
     },
     "auth/product": {
         name: "auth/product",
@@ -87,7 +87,7 @@ export default {
         up: true,
         find: true,
         findByPage: true,
-        like:["id","name"]
+        like:["_id","name"]
     },
     "permission/permissions": {
         name: "permission/permissions",
@@ -100,7 +100,7 @@ export default {
         up: true,
         find: true,
         findByPage: true,
-        like:["id","name"]
+        like:["_id","name"]
     },
     "permission/todo": {
         name: "permission/todo",
@@ -113,7 +113,7 @@ export default {
         up: true,
         find: true,
         findByPage: true,
-        like:["id","name"]
+        like:["_id","name"]
     },
     "permission/menu": {
         name: "permission/menu",
@@ -126,7 +126,7 @@ export default {
         up: true,
         find: false,
         findByPage: true,
-        like:["id","name"]
+        like:["_id","name"]
     },
     "modular/modular": {
         name: "modular",
@@ -139,7 +139,7 @@ export default {
         up: true,
         find: true,
         findByPage: true,
-        like:["id","name"]
+        like:["_id","name"]
     },
     "modular/gateway": {
         name: "modular/gateway",
@@ -152,7 +152,7 @@ export default {
         up: true,
         find: true,
         findByPage: true,
-        like:["id","name"]
+        like:["_id","name"]
     },
     "api/api": {
         name: "api/api",
@@ -165,7 +165,7 @@ export default {
         up: true,
         find: true,
         findByPage: true,
-        like:["id","name"]
+        like:["_id","name"]
     },
     "api/word": {
         name: "api/word",
@@ -178,7 +178,7 @@ export default {
         up: true,
         find: true,
         findByPage: true,
-        like:["id","name"]
+        like:["_id","name"]
     },
     
 }

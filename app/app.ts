@@ -12,6 +12,8 @@ import logger from "./library/log/logger"
 import RedisData from "./library/help/redisData";
 import routers from "./routes/index";
 
+import cors from "kcors";
+
 
 const convert = require('koa-convert');
 
@@ -32,6 +34,8 @@ app.use(convert(body({
     }
     // querystring: require('qs')
 }))); //表单什么数据转换
+
+// app.use(cors());
 
 // app.use(new CSRF({   invalidSessionSecretMessage: 'Invalid session secret',
 // invalidSessionSecretStatusCode: 403,   invalidTokenMessage: 'Invalid CSRF

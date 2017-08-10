@@ -31,6 +31,7 @@ const findByPage = function(searchData,pageInfo,config) {
             let exp = new RegExp(searchData.searchKey);
             let newLike = [];
             like.forEach((value,index)=>{
+                if(value === "_id") return;
                 newLike.push({[value]:exp})
                 return 
             })

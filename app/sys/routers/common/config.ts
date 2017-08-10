@@ -178,7 +178,7 @@ export default {
         up: true,
         find: true,
         findByPage: true,
-        like:["_id","name"]
+        like:["url", "method"]
     },
     
 }

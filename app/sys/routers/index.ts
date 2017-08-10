@@ -2,7 +2,7 @@
 import authRouters from "./auth";
 import commonRoutes from "./common";
 import permissionRoutes from "./permission";
-import  modularRoutes from "./modular";
+import modularRoutes from "./modular";
 import apiRoutes from './api';
 
 

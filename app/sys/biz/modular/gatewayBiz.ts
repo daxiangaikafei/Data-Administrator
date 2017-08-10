@@ -4,11 +4,9 @@ import Result from "./../../../library/help/result";
 import DB from "./../../model/index"
 import RedisData from "./../../../library/help/redisData";
 
-
 const db = new DB("modular/gateway");
 import Error from "./../../../library/help/error";
 const error = new Error("roleBiz");
-
 
 //获取所有列表
 export const getList = function (ctx, next) {
@@ -52,21 +50,23 @@ export const getListByChannel = (ctx, next) => {
     })
 }
 
-export const pushRedis = (ctx, next) => {
-    let result = new Result();
-    return db.find({$or:[{isGreatWall: true},{isLogin:false}]}).then(data=>{
+export const pushRedis = async () => {
+    
+    db.find({$or:[{isGreatWall: true},{isLogin:false}]}).then(data=>{
         let routes = {}
         data.map(obj => {
             routes[obj.url] = {
                 isGreatWall: obj.isGreatWall,
                 isLogin: obj.isLogin,
+                isUse: obj.isUse,
+                isRouter: obj.isRouter,
                 version: obj.version
             }
         })
         let redisData = new RedisData("localConfig");
-        redisData.setProps("gateway.routes", routes,true);
-        ctx.body = result.success();
-    }).catch((error) => {
-        ctx.body = result.error(1,error.message);
+        redisData.setProps("gateway.routes", routes, true);
+        return redisData
+    }).catch((err) => {
+        return error.set(1, err.message); 
     })
 }

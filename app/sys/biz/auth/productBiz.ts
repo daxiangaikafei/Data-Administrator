@@ -7,7 +7,9 @@ import {each} from "lodash";
 import Error from "./../../../library/help/error";
 const error = new Error("userBiz");
 
-export const getList = function(product) {
+import * as mongooseHelp from "./../../../library/help/mongoose";
+
+export const getList = function(product,like) {
     
     var populate = function(param,sort,currentPage,pageSize){
         return db.find(param).populate({
@@ -20,7 +22,8 @@ export const getList = function(product) {
             select: "name",
         }).sort(sort).skip((currentPage) * pageSize).limit(pageSize)
     }
-    return db.findByPage(product, {}, {}, populate).then((data:any) => {
+    let newData = mongooseHelp.getSearchKeyValue(product,like)
+    return db.findByPage(newData, {}, {}, populate).then((data:any) => {
                 return data;
             }).catch((err) => {
                  throw error.set(1, err.message);

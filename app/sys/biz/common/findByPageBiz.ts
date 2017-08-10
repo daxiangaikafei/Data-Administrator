@@ -7,39 +7,20 @@ import * as moment from "moment";
 import Error from "./../../../library/help/error";
 const error = new Error("biz/common/findByPageSize");
 
+import * as mongooseHelp from "./../../../library/help/mongoose";
 
-import {BSON,ObjectID} from "bson";
-const bson = new BSON();
-import {Types} from "mongoose";
 
 const findByPage = function(searchData,pageInfo,config) {
 
     let db = new DB(config.path);
     let {pageSize,currentPage} = pageInfo;
-    let like = config.like||["id","name"],isId=false;
-       
     //模糊查询
-    if(searchData.searchKey){
-        try {
-            Types.ObjectId(searchData.searchKey);
-            searchData["_id"] = searchData.searchKey
-            isId = true;
-        } catch (err) {
-            
-        }
-        if(isId===false){
-            let exp = new RegExp(searchData.searchKey);
-            let newLike = [];
-            like.forEach((value,index)=>{
-                if(value === "_id") return;
-                newLike.push({[value]:exp})
-                return 
-            })
-            searchData["$or"] = newLike;
-        }
-        delete searchData.searchKey;
-    }
-    return db.findByPage(searchData, {} ,{ pageSize: pageSize||10, currentPage: currentPage||1 }).then((data) => {
+    let like = config.like;
+    let newData = mongooseHelp.getSearchKeyValue(searchData,like)
+    
+
+    
+    return db.findByPage(newData, {} ,{ pageSize: pageSize||10, currentPage: currentPage||1 }).then((data) => {
         each(data.result, function(one, index) {
             one._doc.createTime = moment(one.createTime).format("YYYY-MM-DD HH:mm:ss");
             one._doc.upTime = moment(one.upTime).format("YYYY-MM-DD HH:mm:ss");

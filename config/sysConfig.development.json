@@ -2,23 +2,29 @@
     "server": {
             "url": "",
             "prot": ""
-        },
-        "localServer": {
-            "port": 3002
-        },
-        "redis": {
-            "port": 6379,
-            "host": "192.168.132.40",
-            "family": 4,
-            "name":"qbiinode"
-        },
-        "qiniu": {
-            "ACCESS_KEY": "",
-            "SECRET_KEY": "",
-            "Bucket_Name": ""
-        },
-        "monogodb":{
-            "port": 27017,
-            "ip": "192.168.132.40"
+    },
+    "localServer": {
+        "port": 3002
+    },
+    "redis": {
+        "port": 6379,
+        "host": "192.168.132.40",
+        "family": 4,
+        "name":"qbiinode"
+    },
+    "qiniu": {
+        "ACCESS_KEY": "",
+        "SECRET_KEY": "",
+        "Bucket_Name": ""
+    },
+    "monogodb":{
+        "port": 27017,
+        "ip": "192.168.132.40"
+    },
+    "initData":{
+        "userInfo":{
+            "username":"admin1",
+            "password":"a123456"
         }
+    }
 }

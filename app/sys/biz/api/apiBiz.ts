@@ -27,10 +27,8 @@ const getList =  function (apiInfo) {
 }
 
 const pushRedis = function(){
-    //{$or:[{isGreatWall: true},{isLogin:false}]}
-    return db.find({isLogin:false}).then(data=>{
+    return db.find({$or:[{"todos.isGreatWall": true, "todos.isLogin": false}]}).then(data=>{
         let routes = {}
-        console.log(data)
         data.map(obj => {
             routes[obj.url] = {
                 isGreatWall: obj.isGreatWall,
@@ -40,7 +38,6 @@ const pushRedis = function(){
                 version: obj.version
             }
         })
-        console.log(routes)
         let redisData = new RedisData("localConfig");
         redisData.setProps("gateway.routes", routes, true);
         return redisData

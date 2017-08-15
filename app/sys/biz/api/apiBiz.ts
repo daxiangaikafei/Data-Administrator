@@ -39,8 +39,7 @@ const pushRedis = function(){
             }
         })
         let redisData = new RedisData("localConfig");
-        redisData.setProps("gateway.routes", routes, true);
-        return redisData
+        return redisData.setProps("gateway.routes", routes, true);
     }).catch((err) => {
         return error.set(1, err.message); 
     })

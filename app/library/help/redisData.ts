@@ -18,11 +18,8 @@ export default class RedisData {
     private replace:boolean = false;//是否强制替换所有
     private async saveData(data) {
         let baseData = await this.getDataAsync();
-        let saveData = this.clone(baseData,data);
-        // console.info("最终数据为")
-        // console.log(saveData);
+        let saveData = this.merge(baseData,data);
         return redis.set(this.key, JSON.stringify(saveData));
-        // redis.expire(key,config.redis.expiration);
     }
     /**
      * 获取数据
@@ -72,7 +69,7 @@ export default class RedisData {
      * @param baseMap 
      * @param newMap 
      */
-    private clone(baseMap, newMap,isReplace = false) {
+    private merge(baseMap, newMap,isReplace = false) {
         let tempMap = {},
             temp,willRepacle = true;
         if (!_.isObject(baseMap)) {
@@ -88,7 +85,7 @@ export default class RedisData {
                     tempMap = newMap;
                     break;
                 }
-                temp = this.clone(baseMap[key], newMap[key]);
+                temp = this.merge(baseMap[key], newMap[key]);
                 tempMap[key] = temp;
                 willRepacle = false;
             } else {

@@ -19,12 +19,16 @@
     },
     "monogodb":{
         "port": 27017,
-        "ip": "192.168.132.40"
+        "ip": "192.168.132.40",
+        "space":"temp1"
     },
     "initData":{
         "userInfo":{
             "username":"admin1",
             "password":"a123456"
-        }
+        },
+        "menu":{
+            "ss":""
+        } 
     }
 }

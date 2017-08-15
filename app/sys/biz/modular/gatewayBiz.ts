@@ -52,7 +52,7 @@ export const getListByChannel = (ctx, next) => {
 
 export const pushRedis = async () => {
     
-    db.find({$or:[{isGreatWall: true},{isLogin:false}]}).then(data=>{
+    db.find().then(data=>{
         let routes = {}
         data.map(obj => {
             routes[obj.url] = {

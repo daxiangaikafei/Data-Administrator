@@ -9,7 +9,7 @@ const error = new Error("userBiz");
 
 import * as mongooseHelp from "./../../../library/help/mongoose";
 
-export const getList = function(product,like) {
+export const getList = function(product,like?:any) {
     
     var populate = function(param,sort,currentPage,pageSize){
         return db.find(param).populate({

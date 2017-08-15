@@ -31,16 +31,16 @@ const pushRedis = function(){
         let routes = {}
         data.map(obj => {
             routes[obj.url] = {
-                isGreatWall: obj.isGreatWall,
-                isLogin: obj.isLogin,
-                isUse: obj.isUse,
-                isRouter: obj.isRouter,
+                isGreatWall: obj.todos.isGreatWall,
+                isLogin: obj.todos.isLogin,
+                isUse: obj.todos.isUse,
+                isRouter: obj.todos.isRouter,
                 version: obj.version
             }
         })
         let redisData = new RedisData("localConfig");
-        redisData.setProps("gateway.routes", routes, true);
-        return redisData
+        return redisData.setProps("gateway.routes", routes, false);
+        // return redisData
     }).catch((err) => {
         return error.set(1, err.message); 
     })

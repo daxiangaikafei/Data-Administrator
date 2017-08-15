@@ -6,21 +6,17 @@ import * as _ from "lodash";
 
 const { monogodb } = require("./../../../config/index");
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://' + monogodb.ip + ":" + monogodb.port + '/temp1',{"useMongoClient":true},function(error) {
+mongoose.connect('mongodb://' + monogodb.ip + ":" + monogodb.port + '/' + monogodb.space,{"useMongoClient":true},function(error) {
     // body...
     if (error) {
         //console.log("连接数据库 出错", error);
     }
 });
 
-// require ("./auth/dictionary");
-
 class DB {
     private  Model
     constructor(path) {
         let model = require("./" + path);
-        // console.error("path:",path)
-        //let a:mongoose.model ;
         // this.Model = mongoose.model(model.dataBasename, model.Schema);
         this.Model = model
         this.save = this.save.bind(this);
@@ -39,17 +35,6 @@ class DB {
             })
 
     }
-    // update(id, updata) {
-    //     let model = this.Model;
-    //     updata.upTime = moment();
-    //     return new Promise(function(resolve, reject) {
-    //         model.findByIdAndUpdate({ _id: id }, { $set: updata }).then((data) => {
-    //             resolve(data);
-    //         }).catch((error) => {
-    //             reject(error);
-    //         });
-    //     });
-    // }
     update(id, updata) {
         let model = this.Model;
         updata.upTime = moment();
@@ -57,13 +42,6 @@ class DB {
             doc.set(updata);
             doc.save();
         })
-        // return new Promise(function(resolve, reject) {
-        //     model.findByIdAndUpdate({ _id: id }, { $set: updata }).then((data) => {
-        //         resolve(data);
-        //     }).catch((error) => {
-        //         reject(error);
-        //     });
-        // });
     }
     getModel(){
         return this.Model;

@@ -11,8 +11,10 @@ import RequestLogger from "./library/log/request";
 import logger from "./library/log/logger"
 import RedisData from "./library/help/redisData";
 import routers from "./routes/index";
+import DataBaseInit from './sys/init/index';
 
 import cors from "kcors";
+
 
 
 const convert = require('koa-convert');
@@ -84,3 +86,6 @@ each(routers, function (router, index) {
 })
 
 app.listen(config.localServer.port);
+
+let dbInit = new DataBaseInit();
+dbInit.init();

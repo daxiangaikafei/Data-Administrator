@@ -1,0 +1,11 @@
+{
+    "auth/user":[
+        {
+            "username": "test1112",
+            "password": "a123456",
+            "realName": "管理员",
+            "createBy": "------",
+            "upBy": "------"
+        }
+    ]
+}

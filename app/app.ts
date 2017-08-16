@@ -87,5 +87,6 @@ each(routers, function (router, index) {
 
 app.listen(config.localServer.port);
 
+//初始化数据
 let dbInit = new DataBaseInit();
 dbInit.init();

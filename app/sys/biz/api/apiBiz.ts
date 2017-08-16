@@ -31,10 +31,10 @@ const pushRedis = function(){
         let routes = {}
         data.map(obj => {
             routes[obj.url] = {
-                isGreatWall: obj.isGreatWall,
-                isLogin: obj.isLogin,
-                isUse: obj.isUse,
-                isRouter: obj.isRouter,
+                isGreatWall: obj.todos.isGreatWall,
+                isLogin: obj.todos.isLogin,
+                isUse: obj.todos.isUse,
+                isRouter: obj.todos.isRouter,
                 version: obj.version
             }
         })

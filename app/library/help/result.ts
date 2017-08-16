@@ -15,9 +15,9 @@ class Result {
     private resultCode : number;
     private resultMessage : string;
     private result : any;
-    success(result ?: any) {
+    success(result ?: any,message="success") {
         this.resultCode = 0;
-        this.resultMessage = "success";
+        this.resultMessage = message;
         this.result = result;
         return this.getValue();
     }

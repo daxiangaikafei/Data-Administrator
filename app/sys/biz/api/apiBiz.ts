@@ -7,6 +7,8 @@ const error = new Error("api/apiBiz");
 
 const db = new DB("api/api");
 
+import * as mongooseHelp from "./../../../library/help/mongoose";
+import config from "../../routers/common/config";
 
 //获取所有列表
 const getList =  function (apiInfo) {
@@ -18,6 +20,18 @@ const getList =  function (apiInfo) {
         }).sort(sort).skip((currentPage) * pageSize).limit(pageSize)
     }
 
+    //路由状态查询
+    if(apiInfo && apiInfo.apiSetting){
+        let temp = apiInfo.apiSetting.split("_");
+        if(temp.length === 2){
+            apiInfo["todos." + temp[0]] = temp[1] === "1" ? true : false;
+        }
+        delete apiInfo.apiSetting;
+    }
+
+    //模糊查询
+    let like = config["api/api"].like;
+    apiInfo = mongooseHelp.getSearchKeyValue(apiInfo, like)
 
     return db.findByPage(apiInfo, {},{}, populate).then((data) => {
         return data;

@@ -7,6 +7,9 @@ import {each} from "lodash";
 import Error from "./../../../library/help/error";
 const error = new Error("userBiz");
 
+import * as mongooseHelp from "./../../../library/help/mongoose";
+import config from "../../routers/common/config";
+
 export const getList = function(department) {
     
     //  let {id} = ctx.params;
@@ -19,6 +22,11 @@ export const getList = function(department) {
             select:"name"
         }).sort(sort).skip((currentPage) * pageSize).limit(pageSize)
     }
+
+    //模糊查询
+    let like = config["auth/department"].like;
+    department = mongooseHelp.getSearchKeyValue(department, like)
+
     return db.findByPage(department,{},{},populate).then((data:any) => {
                 // ctx.body = result.success(data);
                 return data;

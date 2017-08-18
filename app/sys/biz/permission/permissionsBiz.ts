@@ -7,7 +7,8 @@ const db = new DB("permission/permissions");
 import Error from "./../../../library/help/error";
 const error = new Error("roleBiz");
 
-
+import * as mongooseHelp from "./../../../library/help/mongoose";
+import config from "../../routers/common/config";
 
 //const 
 
@@ -85,6 +86,11 @@ export const getList = function(permissions) {
             match: { isDel:0}
         }).sort(sort).skip((currentPage) * pageSize).limit(pageSize)
     }
+
+    //模糊查询
+    let like = config["permission/permissions"].like;
+    permissions = mongooseHelp.getSearchKeyValue(permissions, like)
+
     return db.findByPage(permissions,{},{},populate).then((data:any) => {
                 // ctx.body = result.success(data);
                 return data;

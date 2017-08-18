@@ -76,9 +76,6 @@ const up = async function (id,userInfo) {
     }).catch((err) => {
         throw error.set(1, err.message);
     })
-
- 
-
 }
 
 const save = async function (saveData : any) {
@@ -160,7 +157,7 @@ export const getUsersByPage = async function (userInfo,pageInfo={pageSize:10000,
     //模糊查询
     if(userInfo.searchKey){
         let exp = new RegExp(userInfo.searchKey);
-        userInfo["$or"] = [{"id":exp},{"username":exp}];
+        userInfo["$or"] = [{"username":exp},{"realName":exp}];
         //  userInfo["$or"] = [{"id":"admin1"},{"username":"admin1"}];
         delete userInfo.searchKey;
     }

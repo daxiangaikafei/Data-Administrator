@@ -48,7 +48,7 @@ export default {
         up: false,
         find: false,
         findByPage: false,
-        like:["_id","name"]
+        like:["username","realName"]
     },
     "auth/userGroup": {
         name: "auth/userGroup",
@@ -165,7 +165,7 @@ export default {
         up: true,
         find: true,
         findByPage: true,
-        like:["_id","name"]
+        like:["_id","description"]
     },
     "api/word": {
         name: "api/word",

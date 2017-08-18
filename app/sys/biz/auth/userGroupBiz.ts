@@ -9,6 +9,8 @@ const db = new DB("auth/userGroup");
 import Error from "./../../../library/help/error";
 const error = new Error("roleBiz");
 
+import * as mongooseHelp from "./../../../library/help/mongoose";
+import config from "../../routers/common/config";
 
 //
 export const getList = function(userGroup) {
@@ -21,6 +23,11 @@ export const getList = function(userGroup) {
             select:"name"
         }).sort(sort).skip((currentPage) * pageSize).limit(pageSize)
     }
+
+    //模糊查询
+    let like = config["auth/userGroup"].like;
+    userGroup = mongooseHelp.getSearchKeyValue(userGroup, like)
+
     return db.findByPage(userGroup,{},{},populate).then((data:any) => {
                 // ctx.body = result.success(data);
                 return data;

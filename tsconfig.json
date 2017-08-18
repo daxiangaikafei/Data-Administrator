@@ -4,7 +4,8 @@
     "allowJs":true,
     "charset":"utf-8",
     "module": "commonjs",
-    "watch":true
+    "watch":true,
+    "sourceMap": true
   },
   "exclude": [
     "node_modules",

@@ -4,7 +4,7 @@
             "prot": ""
     },
     "localServer": {
-        "port": 3002
+        "port": 3000
     },
     "redis": {
         "port": 6379,

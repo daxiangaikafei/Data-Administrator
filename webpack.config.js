@@ -1,6 +1,9 @@
 var webpack = require("webpack");
 const CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
 
+// const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const UglifyEsPlugin = require('uglify-es-webpack-plugin');
+
 var minSize = {
     minChunkSize: 51200,
     compress: {
@@ -10,7 +13,7 @@ var minSize = {
 function _externals() {
     let manifest = require('./package.json');
     let dependencies = manifest.dependencies;
-    // //console.log("啊哈",dependencies)
+    console.log("啊哈",dependencies)
     let externals = {};
     for (let p in dependencies) {
         
@@ -22,8 +25,17 @@ function _externals() {
 
 let externals = _externals();
 
+
+// let env = "development";
+// upEnv:function(e){
+//         console.log("修改webpack的全局环境变量"+e)
+//         env =  e;
+//     }
+
 //console.log(externals);
-module.exports = {
+module.exports = function(env){
+    console.log("Env"+env)
+    return {
     entry: {
         app: "./app/app.ts"
     },
@@ -37,7 +49,7 @@ module.exports = {
         Buffer: false,
         setImmediate: false
     },
-    //devtool: "source-map", 
+    // devtool: "source-map", 
     output: {
         path: __dirname + "/dist",
         filename: "app.js",
@@ -68,17 +80,20 @@ module.exports = {
             .LimitChunkCountPlugin({maxChunks: 50, entryChunkMultiplicator: 2}),
         new webpack.DefinePlugin({
             "process.env": {
-                NODE_ENV: JSON.stringify("production")
+                NODE_ENV: JSON.stringify(env)
             }
         }),
-        new webpack
-            .optimize
-            .UglifyJsPlugin({
-                compress: {
-                    drop_console: true,
-                    warnings: false
-                }
-            })
-    ]
-
+        // new UglifyEsPlugin()
+        // new webpack
+        //     .optimize
+        //     .UglifyJsPlugin({
+        //         compress: {
+        //             drop_console: true,
+        //             warnings: false
+        //         }
+        //     })
+    ]   
 };
+
+
+}

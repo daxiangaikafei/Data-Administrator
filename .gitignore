@@ -10,3 +10,4 @@ config/**/*.js.map
 config/**/*.js
 help/**/*.js.map
 help/**/*.js
+*.log

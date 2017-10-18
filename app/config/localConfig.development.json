@@ -9,7 +9,9 @@
     "routes": {
     },
     "ignoreUrls": {
-        "/api/sys/v1/user/login":true
+        "/api/sys/v1/auth/user/login":true,
+        "/api/sys/gateway/redis/push":true,
+        "/api/sys/db/auth/user/up":true
     },
     "redis": {
         "tokenKey": "node-sys-token",
@@ -17,7 +19,7 @@
     },
     "cookie": {
         "signed": true,
-        "maxAge": 2592000, 
+        "maxAge": 25920000000, 
         "secure": false, 
         "httpOnly": true
     },

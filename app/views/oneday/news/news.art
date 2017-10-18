@@ -1,0 +1,66 @@
+<div class="index_modules news_container {{isSingle ? "abs_sel" : ""}}">
+    <div class="index_module_header">
+        <div class="index_header_icon icon_news"></div>
+        <div>新闻</div>
+    </div>
+    <div class="news_list">
+        {{each newsList as obj index}}
+            {{if index === 0}}
+                <div class="news_item bigPic" data-id={{obj.newsId}}>
+                    <div class="main_div">
+                        <img class="news_img" src={{obj.imageUrl}} alt=""/>
+                        <div class="mask_info_div">
+                            <div class="txt_div">
+                                <span class="news_txt no_wrap">{{obj.title}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="btn_list">
+                        <span class="laiyuans">来源：{{obj.newsOrigin}}</span>
+                        <div>
+                            <span class="btn_like {{obj.thumb==1 ? "active" : ""}}"></span>
+                            <span class="btn_unlike {{obj.thumb > 1 ? "active" : ""}}"></span>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            {{else if obj.imageUrl != ""}}
+                <div class="news_item samllPic" data-id={{obj.newsId}}>
+                    <div class="left_div">
+                        <img class="news_img" src="{{obj.imageUrl}}" alt="" />
+                    </div>
+                    <div class="right_div">
+                        <div class="news_txt wrapTxt">{{obj.title}}</div>
+                        <div class="btn_list">
+                            <span class="laiyuans">来源：{{obj.newsOrigin}}</span>
+                            <div>
+                                <span class="btn_like {{obj.thumb==1 ? "active" : ""}}"></span>
+                                <span class="btn_unlike {{obj.thumb > 1 ? "active" : ""}}"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            {{else}}
+                <div class="news_item noPic" data-id={{obj.newsId}}>
+                    <div class="main_div">
+                        <span class="news_txt">{{obj.title}}</span>
+                        <span class="icon_arrow"></span>
+                    </div>
+                    <div class="btn_list">
+                        <span class="laiyuans">来源：{{obj.newsOrigin}}</span>
+                        <div>
+                            <span class="btn_like {{obj.thumb==1 ? "active" : ""}}"></span>
+                            <span class="btn_unlike {{obj.thumb > 1 ? "active" : ""}}"></span>
+                        </div>
+                    </div>
+                </div>
+            {{/if}}
+        {{/each}}
+    </div>
+    <!-- <span class="news-from-icon"></span> -->
+    <div class="news_refresh_div"><div>
+    <span>更新时间：</span><span class="update_txt">{{updateTime}}</span><span class="btn_refresh"></span></div></div>     
+    <span class="btn_more">查看更多</span>
+</div>

@@ -3,6 +3,7 @@ var moment = require("moment");
 
 var formate = "YYYY-MM-DD hhmmssSSS";
 
+//分支公司
 var Schema = mongoose.Schema;
 var BranchSchema = new Schema({
     name:{
@@ -10,11 +11,11 @@ var BranchSchema = new Schema({
         required:true,
         maxlength:30,
         minlength:1
-    },//用户名
+    },
     description:{
         type:String,
         maxlength:300
-    },//密码
+    },
     prevId:{
         type:Schema.Types.ObjectId,
         maxlength:40
@@ -51,8 +52,9 @@ var BranchSchema = new Schema({
     }
 });
 
-module.exports = {
-    Schema: BranchSchema,
-    dataBasename: "Branch"
+// module.exports = {
+//     Schema: BranchSchema,
+//     dataBasename: "Branch"
 
-}
+// }
+module.exports = mongoose.model('Branch', BranchSchema);

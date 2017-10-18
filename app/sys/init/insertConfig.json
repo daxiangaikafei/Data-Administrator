@@ -1,0 +1,351 @@
+{
+    
+    "auth/branch": {
+        "tengrong": {
+            "name": "上海藤榕",
+            "description": "公司描述",
+            "createBy": "------",
+            "upBy": "------"
+        },
+        "qiankun": {
+            "name": "成都钱坤",
+            "description": "公司描述",
+            "createBy": "------",
+            "upBy": "------"
+        },
+        "qianliu": {
+            "name": "上海钱柳",
+            "description": "公司描述",
+            "createBy": "------",
+            "upBy": "------"
+        }
+    },
+
+    "auth/department": {
+        "tr-qdkf": {
+            "name": "藤榕前端组",
+            "description": "部门描述",
+            "branchId": "auth/branch.tengrong.id",
+            "createBy": "------",
+            "upBy": "------"
+        },
+        "qk-hdkf": {
+            "name": "钱坤后端组",
+            "description": "部门描述",
+            "branchId": "auth/branch.qiankun.id",
+            "createBy": "------",
+            "upBy": "------"
+        },
+        "ql-yy": {
+            "name": "钱柳运维组",
+            "description": "部门描述",
+            "branchId": "auth/branch.qianliu.id",
+            "createBy": "------",
+            "upBy": "------"
+        }
+    },
+
+    "auth/product": {
+        "testProduct": {
+            "name": "测试项目",
+            "description": "项目描述",
+            "departments": ["auth/department.tr-qdkf.id", "auth/department.qk-hdkf.id"],
+            "createBy": "------",
+            "upBy": "------"
+        }
+    },
+
+    "auth/dictionary": {
+        "GET": {
+            "name": "请求类型",
+            "primarykey": "RequestType",
+            "value": "GET",
+            "showName": "GET",
+            "createBy": "------",
+            "upBy": "------"
+        },
+        "POST": {
+            "name": "请求类型",
+            "primarykey": "RequestType",
+            "value": "POST",
+            "showName": "POST",
+            "createBy": "------",
+            "upBy": "------"
+        },
+        "PUT": {
+            "name": "请求类型",
+            "primarykey": "RequestType",
+            "value": "PUT",
+            "showName": "PUT",
+            "createBy": "------",
+            "upBy": "------"
+        },
+        "DELETE": {
+            "name": "请求类型",
+            "primarykey": "RequestType",
+            "value": "DELETE",
+            "showName": "DELETE",
+            "createBy": "------",
+            "upBy": "------"
+        },
+        "pAdmin-1": {
+            "name": "权限类型",
+            "primarykey": "PermissionsTypes",
+            "value": "1",
+            "showName": "超级用户",
+            "createBy": "------",
+            "upBy": "------"
+        },
+        "pAdmin-2": {
+            "name": "权限类型",
+            "primarykey": "PermissionsTypes",
+            "value": "2",
+            "showName": "管理员用户",
+            "createBy": "------",
+            "upBy": "------"
+        },
+        "pAdmin-3": {
+            "name": "权限类型",
+            "primarykey": "PermissionsTypes",
+            "value": "3",
+            "showName": "普通用户",
+            "createBy": "------",
+            "upBy": "------"
+        }
+    },
+    "permission/permissions": {
+        "admin": {
+            "name": "admin",
+            "description": "权限描述",
+            "type": "auth/dictionary.pAdmin-1.id",
+            "createBy": "------",
+            "upBy": "------"
+        },
+        "menu1": {
+            "name": "menu1",
+            "description": "权限描述",
+            "type": "auth/dictionary.pAdmin-2.id",
+            "createBy": "------",
+            "upBy": "------"
+        },
+        "menu2": {
+            "name": "menu2",
+            "description": "权限描述",
+            "type": "auth/dictionary.pAdmin-3.id",
+            "createBy": "------",
+            "upBy": "------"
+        }
+    },
+
+    "auth/role": {
+        "adminrole": {
+            "name": "admin",
+            "description": "描述",
+            "permissions": ["permission/permissions.admin.id","permission/permissions.menu1.id","permission/permissions.menu2.id"],
+            "createBy": "------",
+            "upBy": "------"
+        },
+        "role1": {
+            "name": "前端开发",
+            "description": "描述",
+            "permissions": ["permission/permissions.menu1.id"],
+            "createBy": "------",
+            "upBy": "------"
+        },
+        "role2": {
+            "name": "后端开发",
+            "description": "描述",
+            "permissions": ["permission/permissions.menu2.id"],
+            "createBy": "------",
+            "upBy": "------"
+        }
+    },
+    "auth/userGroup": {
+        "adminGroup": {
+            "name": "adminGroup",
+            "description": "描述",
+            "roles": ["auth/role.adminrole.id"],
+            "createBy": "------",
+            "upBy": "------"
+        },
+        "menu1Group": {
+            "name": "数据中心-后端组",
+            "description": "描述",
+            "roles": ["auth/role.role1.id"],
+            "createBy": "------",
+            "upBy": "------"
+        },
+        "menu2Group": {
+            "name": "数据中心-前端开发",
+            "description": "描述",
+            "roles": ["auth/role.role2.id"],
+            "createBy": "------",
+            "upBy": "------"
+        }
+    },
+
+    "permission/menu": {
+        "stgl": {
+            "name": "系统管理",
+            "description": "菜单描述",
+            "url": "/",
+            "permissions": ["permission/permissions.admin.id", "permission/permissions.menu1.id", "permission/permissions.menu2.id"],
+            "createBy": "------",
+            "upBy": "------"
+        },
+        "qxxxgl": {
+            "name": "权限信息管理",
+            "description": "菜单描述",
+            "prevId": "permission/menu.stgl.id",
+            "url": "/",
+            "permissions": ["permission/permissions.admin.id", "permission/permissions.menu1.id", "permission/permissions.menu2.id"],
+            "createBy": "------",
+            "upBy": "------"
+        },
+        "gsxxgl": {
+            "name": "公司信息管理",
+            "description": "菜单描述",
+            "prevId": "permission/menu.stgl.id",
+            "url": "/",
+            "permissions": ["permission/permissions.admin.id", "permission/permissions.menu1.id", "permission/permissions.menu2.id"],
+            "createBy": "------",
+            "upBy": "------"
+        },
+        "apigl": {
+            "name": "API管理",
+            "description": "菜单描述",
+            "prevId": "permission/menu.stgl.id",
+            "url": "/",
+            "permissions": ["permission/permissions.admin.id", "permission/permissions.menu1.id", "permission/permissions.menu2.id"],
+            "createBy": "------",
+            "upBy": "------"
+        },
+        "sjgl": {
+            "name": "数据管理",
+            "description": "菜单描述",
+            "prevId": "permission/menu.stgl.id",
+            "url": "/",
+            "permissions": ["permission/permissions.admin.id", "permission/permissions.menu1.id", "permission/permissions.menu2.id"],
+            "createBy": "------",
+            "upBy": "------"
+        },
+        "yhgl": {
+            "name": "用户管理",
+            "description": "菜单描述",
+            "prevId": "permission/menu.qxxxgl.id",
+            "url": "/auth/user/list",
+            "permissions": ["permission/permissions.admin.id", "permission/permissions.menu1.id", "permission/permissions.menu2.id"],
+            "createBy": "------",
+            "upBy": "------"
+        },
+        "jsgl": {
+            "name": "角色管理",
+            "description": "菜单描述",
+            "prevId": "permission/menu.qxxxgl.id",
+            "url": "/auth/role/list",
+            "permissions": ["permission/permissions.admin.id", "permission/permissions.menu1.id", "permission/permissions.menu2.id"],
+            "createBy": "------",
+            "upBy": "------"
+        },
+        "yhzgl": {
+            "name": "用户组管理",
+            "description": "菜单描述",
+            "prevId": "permission/menu.qxxxgl.id",
+            "url": "/auth/usergroup/list",
+            "permissions": ["permission/permissions.admin.id", "permission/permissions.menu1.id", "permission/permissions.menu2.id"],
+            "createBy": "------",
+            "upBy": "------"
+        },
+        "cdgl": {
+            "name": "菜单管理",
+            "description": "菜单描述",
+            "prevId": "permission/menu.qxxxgl.id",
+            "url": "/api/menu/list",
+            "permissions": ["permission/permissions.admin.id", "permission/permissions.menu1.id", "permission/permissions.menu2.id"],
+            "createBy": "------",
+            "upBy": "------"
+        },
+        "zdbgl": {
+            "name": "字典表管理",
+            "description": "菜单描述",
+            "prevId": "permission/menu.qxxxgl.id",
+            "url": "/auth/dictionary/list",
+            "permissions": ["permission/permissions.admin.id", "permission/permissions.menu1.id", "permission/permissions.menu2.id"],
+            "createBy": "------",
+            "upBy": "------"
+        },
+        "qxgl": {
+            "name": "权限管理",
+            "description": "菜单描述",
+            "prevId": "permission/menu.qxxxgl.id",
+            "url": "/api/permissions/list",
+            "permissions": ["permission/permissions.admin.id", "permission/permissions.menu1.id", "permission/permissions.menu2.id"],
+            "createBy": "------",
+            "upBy": "------"
+        },
+        "bmgl": {
+            "name": "部门管理",
+            "description": "菜单描述",
+            "prevId": "permission/menu.gsxxgl.id",
+            "url": "/company/department/list",
+            "permissions": ["permission/permissions.admin.id", "permission/permissions.menu1.id", "permission/permissions.menu2.id"],
+            "createBy": "------",
+            "upBy": "------"
+        },
+        "fzgsgl": {
+            "name": "分支公司管理",
+            "description": "菜单描述",
+            "prevId": "permission/menu.gsxxgl.id",
+            "url": "/company/branch/list",
+            "permissions": ["permission/permissions.admin.id", "permission/permissions.menu1.id", "permission/permissions.menu2.id"],
+            "createBy": "------",
+            "upBy": "------"
+        },
+        "xmgl": {
+            "name": "项目管理",
+            "description": "菜单描述",
+            "prevId": "permission/menu.gsxxgl.id",
+            "url": "/company/product/list",
+            "permissions": ["permission/permissions.admin.id", "permission/permissions.menu1.id", "permission/permissions.menu2.id"],
+            "createBy": "------",
+            "upBy": "------"
+        },
+        "apilb": {
+            "name": "api列表",
+            "description": "菜单描述",
+            "prevId": "permission/menu.apigl.id",
+            "url": "/api/api/list",
+            "permissions": ["permission/permissions.admin.id", "permission/permissions.menu1.id", "permission/permissions.menu2.id"],
+            "createBy": "------",
+            "upBy": "------"
+        },
+        "apiwdgl": {
+            "name": "api文档管理",
+            "description": "菜单描述",
+            "prevId": "permission/menu.apigl.id",
+            "url": "/api/word/list",
+            "permissions": ["permission/permissions.admin.id", "permission/permissions.menu1.id", "permission/permissions.menu2.id"],
+            "createBy": "------",
+            "upBy": "------"
+        },
+        "redissjgl": {
+            "name": "redis数据管理",
+            "description": "菜单描述",
+            "prevId": "permission/menu.sjgl.id",
+            "url": "/redisList",
+            "permissions": ["permission/permissions.admin.id", "permission/permissions.menu1.id", "permission/permissions.menu2.id"],
+            "createBy": "------",
+            "upBy": "------"
+        }
+    },
+    "auth/user": {
+        "user1": {
+            "username": "administrator",
+            "password": "a123456",
+            "realName": "管理员",
+            "userGroups": "auth/userGroup.adminGroup.id",
+            "createBy": "------",
+            "upBy": "------"
+        }
+    }
+}

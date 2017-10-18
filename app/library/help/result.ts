@@ -1,17 +1,10 @@
-interface Config  {
-    error:any;
-    routes:any;
-    ignoreUrls:any;
-    redis:any;
-    cookie:any;
-    SSO:boolean;
-}
 
 
 
-const config:Config = require("./../../config/index");
 
-const Error = config.error;
+const config :any= require("./../../config/index");
+const Errors = config.error;
+
 class Result {
     constructor() {
         this.resultCode = 0;
@@ -22,15 +15,21 @@ class Result {
     private resultCode : number;
     private resultMessage : string;
     private result : any;
-    success(result ?: any) {
+    success(result ?: any,message="success") {
         this.resultCode = 0;
-        this.resultMessage = "success";
+        this.resultMessage = message;
         this.result = result;
         return this.getValue();
     }
     error(code : number=1, errorMsg ?: string) {
         this.resultCode = code;
-        this.resultMessage = Error[code]||errorMsg;
+        this.resultMessage = Errors[code]||errorMsg;
+        return this.getValue();
+    }
+    setError(error){
+        this.resultCode = error.code;
+        this.resultMessage = error.message;
+         this.result = undefined;
         return this.getValue();
     }
     getValue() {

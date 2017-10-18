@@ -14,26 +14,35 @@ export default class RedisData {
         this.key = key;
     }
     private key : string;
+    private forNum:number = 0;//props循环次数
+    private replace:boolean = false;//是否强制替换所有
     private async saveData(data) {
         let baseData = await this.getDataAsync();
-        let saveData = this.clone(baseData,data);
-        return redis.set(this.key, JSON.stringify(data));
-        // redis.expire(key,config.redis.expiration);
+        let saveData = this.merge(baseData,data);
+        return redis.set(this.key, JSON.stringify(saveData));
     }
     /**
      * 获取数据
      */
     async getDataAsync() {
-        let result = JSON.parse(await redis.get(this.key))||{};
+        let result;
+        try{
+            result = JSON.parse(await redis.get(this.key))||{};
+        }catch(err){
+            result = {};
+        }
+        // let result = JSON.parse(await redis.get(this.key))||{};
         return result;
     }
     /**
      * 根据字符串设定数据
      * @param props "name.xx.sss" 
-     * @param value any
+     * @param value any {name:{xxx:{ss}}}
      */
-    async setProps(props = "name.sss.xx", value : any) {
+    async setProps(props = "name.sss.xx", value : any,isReplace=false) {
         let tempArray = props.split(".");
+        this.forNum = tempArray.length;
+        this.replace = isReplace;
         let newMap : any = {},
             temp,
             length = tempArray.length;
@@ -60,24 +69,41 @@ export default class RedisData {
      * @param baseMap 
      * @param newMap 
      */
-    private clone(baseMap, newMap) {
+    private merge(baseMap, newMap,isReplace = false) {
         let tempMap = {},
-            temp;
+            temp,willRepacle = true;
         if (!_.isObject(baseMap)) {
             return newMap;
         }
         if (!_.isObject(newMap)) {
             return baseMap;
         }
+        this.forNum --;
         for (let key in newMap) {
             if (baseMap[key]) {
-                temp = this.clone(baseMap[key], newMap[key]);
+                if(this.replace===true&&this.forNum===0){
+                    tempMap = newMap;
+                    break;
+                }
+                temp = this.merge(baseMap[key], newMap[key]);
                 tempMap[key] = temp;
+                willRepacle = false;
             } else {
                 tempMap[key] = newMap[key];
             }
 
         }
+        
+        // if(willRepacle===true&&this.replace===true&&this.forNum){
+        //     tempMap = newMap;
+        // }
         return Object.assign({}, baseMap, tempMap);
     }
 }
+
+
+// function formate(num){
+//     let date = new Date(num);
+//     return date.getFullYear()+"-"+date.getMonth()+"-"+date.getDate()
+//     +" "+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds();
+// }

@@ -3,6 +3,7 @@ var moment = require("moment");
 
 var formate = "YYYY-MM-DD hhmmssSSS";
 
+//部门
 var Schema = mongoose.Schema;
 var DepartmentSchema = new Schema({
     name:{
@@ -66,8 +67,8 @@ var preFind = function(){
 
 }
 
-module.exports = {
-    Schema: DepartmentSchema,
-    dataBasename: "Department"
-
-}
+// module.exports = {
+//     Schema: DepartmentSchema,
+//     dataBasename: "Department"
+// }
+module.exports = mongoose.model('Department', DepartmentSchema);

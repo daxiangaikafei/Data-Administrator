@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Cache-Control" content="no-store">
+    <meta name="viewport" content="width=device-width,user-scalable=no">
+    <title>OneDay</title>
+    <link href="style.css" rel="stylesheet"></head>
+    <script type="text/javascript">!function(e,t){function i(){var e=a.clientWidth;console.log("设备宽度，"+e+"   clictWidth:"+a.clientWidth),a.style.fontSize=e*r/10+"px"}var n,a=t.documentElement,r=0,o=0;if(!r&&!o){e.navigator.appVersion.match(/android/gi);var l=e.navigator.appVersion.match(/iphone/gi),d=e.devicePixelRatio||1;o=1/(r=l?d>=3&&(!r||r>=3)?3:d>=2&&(!r||r>=2)?2:1:1)}console.log("dpr"+r),i(),o=1/r,a.setAttribute("data-dpr",r),e["data-dpr"]=r;var c=t.querySelector('meta[name="viewport"]');if(c.setAttribute("name","viewport"),c.setAttribute("content","initial-scale="+o+", maximum-scale="+o+", minimum-scale="+o+", user-scalable=no"),a.firstElementChild)a.firstElementChild.appendChild(c);else{var s=t.createElement("div");s.appendChild(c),t.write(s.innerHTML)}e.addEventListener("resize",function(){clearTimeout(n),r=1,n=setTimeout(i,300)},!1),e.addEventListener("pageshow",function(e){e.persisted&&(r=1,clearTimeout(n),n=setTimeout(i,300))},!1)}(window,document)</script>
+<body> 
+    <header></header>
+    <main id="container-main">
+        
+        <ol id="container-routers">
+        </ol> 
+        
+    </main>
+    <footer></footer>
+<script type="text/javascript" src="bundle-59d1697b.js"></script>
+</body>
+</html> 

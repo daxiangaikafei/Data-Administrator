@@ -25,8 +25,17 @@ function _externals() {
 
 let externals = _externals();
 
+
+// let env = "development";
+// upEnv:function(e){
+//         console.log("修改webpack的全局环境变量"+e)
+//         env =  e;
+//     }
+
 //console.log(externals);
-module.exports = {
+module.exports = function(env){
+    console.log("Env"+env)
+    return {
     entry: {
         app: "./app/app.ts"
     },
@@ -71,10 +80,10 @@ module.exports = {
             .LimitChunkCountPlugin({maxChunks: 50, entryChunkMultiplicator: 2}),
         new webpack.DefinePlugin({
             "process.env": {
-                NODE_ENV: JSON.stringify("production")
+                NODE_ENV: JSON.stringify(env)
             }
         }),
-        new UglifyEsPlugin()
+        // new UglifyEsPlugin()
         // new webpack
         //     .optimize
         //     .UglifyJsPlugin({
@@ -83,6 +92,8 @@ module.exports = {
         //             warnings: false
         //         }
         //     })
-    ]
-
+    ]   
 };
+
+
+}

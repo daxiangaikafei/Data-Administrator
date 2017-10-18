@@ -11,6 +11,7 @@ interface Config  {
 import redis from "./help/redis";
 import Token from "./help/token";
 import Result from "./help/result"; 
+import Error from "./help/error";
 import * as moment from "moment";
 
 const result:Result = new Result();
@@ -66,9 +67,13 @@ class VerifyUser {
                         if(result){
                             rev(JSON.parse(result))
                         }else{
-                            reb()
+                            let error = new Error("verifyUser");
+                            error.set(1,"token无效！");
+                            reb(error)
                         }
                         //return JSON.parse(result);
+                }).catch((error)=>{
+                    console.error(error)
                 })
         })
 
@@ -95,8 +100,8 @@ class VerifyUser {
     getToken(ctx){
         let token = ctx.cookies.get("token");
 
-        if(!token&&process.env.NODE_ENV==="development"){
-            return ctx.request.headers.token||undefined;
+        if(process.env.NODE_ENV==="development"){
+            return ctx.request.headers.token||token;
         }
         return token;
     }
@@ -122,11 +127,13 @@ class VerifyUser {
                 // ctx.userInfo = info;
                 ctx.state.userInfo = info;
                 return next();
-            }).catch(()=>{
-                result.error(200,"登录过期");
-                ctx.body = result.getValue();
-                return; 
             })
+            // }).catch((error)=>{
+            //     console.log(error)
+            //     result.error(200,"登录过期");
+            //     ctx.body = result.getValue();
+            //     return; 
+            // })
         }else{
             result.error(200,"未登陆");
             ctx.body = result.getValue();

@@ -16,6 +16,8 @@ import DataBaseInit from './sys/init/index';
 import cors from "kcors";
 
 
+import render from "koa-art-template";
+
 const convert = require('koa-convert');
 
 const env = process.env.NODE_ENV || 'development';
@@ -24,6 +26,12 @@ let result : Result = new Result();
 let verifyUser : VerifyUser = new VerifyUser();
 let app : koa = new koa();
 app.keys = ['im a newer secret', '你说是啥 就是啥，呵呵哒'];
+
+// render(app, {
+//   root: path.join(__dirname, 'views'),
+//   extname: '.art',
+//   debug: process.env.NODE_ENV !== 'production'
+// });
 
 
 //request日志处理
@@ -47,6 +55,7 @@ app.context.onerror = function (err) {
     if (err == null) {
         return;
     }
+    console.log(err)
     result.error(500, "");
     this
         .res

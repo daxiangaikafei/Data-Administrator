@@ -30,7 +30,7 @@ const logger = function () {
   return async function (ctx, next) {
     // //console.log(ctx.request);
     let {request} = ctx;
-    let userId = "";
+    let userId = ""; 
     let _startTime = Date.now()
     // return next();
     try {

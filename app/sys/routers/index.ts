@@ -6,7 +6,7 @@ import modularRoutes from "./modular";
 import apiRoutes from './api';
 
 
-console.log(commonRoutes)
+// console.log(commonRoutes)
 export default [
     authRouters,
     commonRoutes,
